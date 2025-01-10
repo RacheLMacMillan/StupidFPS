@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
+	[SerializeField] private CharacterController _characterController;
+	
 	[SerializeField] private float _playerSpeed;
+	
+	[SerializeField] private Vector3 _moveDirection;
 	
 	public void Move(Vector2 direction, float speedMultiplier = 1f)
 	{
-		Vector3 moveDirection = new Vector3
+		_moveDirection = new Vector3
 		(
 			direction.x,
 			Vector2.zero.y,
@@ -16,8 +20,8 @@ public class PlayerMover : MonoBehaviour
 		float multiplyedSpeed = _playerSpeed * speedMultiplier;
 		float scaledSpeed = multiplyedSpeed * Time.deltaTime;
 				
-		Vector3 scaledMoveDirection = moveDirection * scaledSpeed;
+		Vector3 scaledMoveDirection = _moveDirection * scaledSpeed;
 		
-		transform.position += scaledMoveDirection;
+		_characterController.Move(transform.TransformDirection(scaledMoveDirection));
 	}
 }
