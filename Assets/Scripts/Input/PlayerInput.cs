@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerInputActions : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
 	private InputMap _inputMap;
 	
@@ -15,6 +15,8 @@ public class PlayerInputActions : MonoBehaviour
 		_inputMap = new InputMap();
 		
 		_playerMover = GetComponent<PlayerMover>();
+		
+		_inputMap.PlayScene.Sprint.performed += context => _playerMover.Sprint();
 	}
 	
 	private void Update()
