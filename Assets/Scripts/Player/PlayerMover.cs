@@ -31,10 +31,10 @@ public class PlayerMover : MonoBehaviour
 	
 	public void Sprint()
 	{
-		// if(_characterController.isGrounded == false)
-		// {
-		// 	throw new ArgumentException($"{gameObject.name} is not on the ground.");
-		// }
+		if(_characterController.isGrounded == false)
+		{
+			throw new ArgumentException($"{gameObject.name} is not on the ground.");
+		}
 		
 		_isPlayerSprinting = !_isPlayerSprinting;
 		
