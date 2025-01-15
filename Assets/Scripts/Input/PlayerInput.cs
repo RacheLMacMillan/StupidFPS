@@ -26,8 +26,8 @@ public class PlayerInput : MonoBehaviour
 	
 	private void Update()
 	{
-		_playerGravitation.GravitatePlayer();
 		_playerGroundedChecker.CheckIsGrounded();
+		_playerGravitation.GravitatePlayer();
 		_playerMover.Move(_inputMap.PlayScene.Move.ReadValue<Vector2>());
 		_playerLook.Look(_inputMap.PlayScene.Look.ReadValue<Vector2>());
 	}

@@ -20,7 +20,7 @@ public class PlayerGravitation : MonoBehaviour
 	{
 		PlayerVelocity.y += _gravityValue * Time.deltaTime;
 		
-		if (_playerIsGoundedChecker.CheckIsGrounded())
+		if (_playerIsGoundedChecker.IsPlayerGrounded)
 		{
 			PlayerVelocity.y = _passiveStress;
 		}
