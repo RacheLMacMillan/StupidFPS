@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerGroundedChecker : MonoBehaviour
 {
-	public readonly ReactiveProperty<bool> IsPlayerGrounded;
+	public readonly ReactiveProperty<bool> IsPlayerGrounded = new();
 	
-	[SerializeField] LayerMask layerMask;
+	[SerializeField] private LayerMask _toStandLayer;
 	
 	[SerializeField] private Vector3 _radiusOfCheck;
 	
@@ -12,7 +12,7 @@ public class PlayerGroundedChecker : MonoBehaviour
 	
 	public bool CheckIsGrounded()
 	{
-		_isPlayerGrounded = Physics.CheckBox(transform.position, _radiusOfCheck, transform.rotation, layerMask);
+		_isPlayerGrounded = Physics.CheckBox(transform.position, _radiusOfCheck, transform.rotation, _toStandLayer);
 		
 		IsPlayerGrounded.Value = _isPlayerGrounded;
 		
