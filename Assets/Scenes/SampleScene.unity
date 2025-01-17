@@ -993,6 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForce: 3
+  _jumpingStartUp: {x: 0, y: 0, z: 0}
 --- !u!1 &1638891572
 GameObject:
   m_ObjectHideFlags: 0
