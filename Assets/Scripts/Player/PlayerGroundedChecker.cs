@@ -1,13 +1,8 @@
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 public class PlayerGroundedChecker : MonoBehaviour
 {
-	public bool IsPlayerGrounded 
-	{
-		get => _isPlayerGrounded;
-		private set => CheckIsGrounded();
-	}
+	public readonly ReactiveProperty<bool> IsPlayerGrounded;
 	
 	[SerializeField] LayerMask layerMask;
 	
@@ -19,15 +14,14 @@ public class PlayerGroundedChecker : MonoBehaviour
 	{
 		_isPlayerGrounded = Physics.CheckBox(transform.position, _radiusOfCheck, transform.rotation, layerMask);
 		
-		Debug.Log("Player grounded - " + _isPlayerGrounded);
-		Debug.Log("Is Player grounded - " + IsPlayerGrounded);
+		IsPlayerGrounded.Value = _isPlayerGrounded;
 		
-		return _isPlayerGrounded;
+		return IsPlayerGrounded.Value;
 	}
 	
 	private void OnDrawGizmos()
 	{
-		Gizmos.color = Color.red;
+		Gizmos.color = Color.green;
 		Gizmos.DrawWireCube(transform.position, _radiusOfCheck);
 	}
 }
