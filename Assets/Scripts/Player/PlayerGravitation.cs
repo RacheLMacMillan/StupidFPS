@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController), typeof(PlayerGroundedChecker))]
 public class PlayerGravitation : MonoBehaviour
 {
 	[SerializeField] private float _gravityValue;

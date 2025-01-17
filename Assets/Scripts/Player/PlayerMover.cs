@@ -1,16 +1,24 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController), typeof(PlayerGroundedChecker))]
 public class PlayerMover : MonoBehaviour
 {
-	[SerializeField] private CharacterController _characterController;
-	
 	[SerializeField] private float _playerSpeed;
 	[SerializeField] private float _speedMultiplier = 1f;
+	
+	private CharacterController _characterController;
+	private PlayerGroundedChecker _playerGroundedChecker;
 	
 	private Vector3 _moveDirection;
 	
 	private bool _isPlayerSprinting = false;
+	
+	private void Awake() {
+		_characterController = GetComponent<CharacterController>();
+		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
+		
+	}
 	
 	public void Move(Vector2 direction)
 	{
@@ -31,7 +39,7 @@ public class PlayerMover : MonoBehaviour
 	
 	public void Sprint()
 	{
-		if(_characterController.isGrounded == false)
+		if(_playerGroundedChecker.IsPlayerGrounded.Value == false)
 		{
 			throw new ArgumentException($"{gameObject.name} is not on the ground.");
 		}

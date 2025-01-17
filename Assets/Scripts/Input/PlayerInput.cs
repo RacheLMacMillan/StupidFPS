@@ -1,13 +1,16 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerGravitation), typeof(PlayerGroundedChecker))]
+[RequireComponent(typeof(PlayerMover), typeof(PlayerLook), typeof(PlayerJumper))]
 public class PlayerInput : MonoBehaviour
 {
 	private InputMap _inputMap;
 	
-	[SerializeField] private PlayerGravitation _playerGravitation;
-	[SerializeField] private PlayerGroundedChecker _playerGroundedChecker;
-	[SerializeField] private PlayerMover _playerMover;
-	[SerializeField] private PlayerLook _playerLook;
+	private PlayerGravitation _playerGravitation;
+	private PlayerGroundedChecker _playerGroundedChecker;
+	private PlayerMover _playerMover;
+	private PlayerLook _playerLook;
+	private PlayerJumper _playerJumper;
 	
 	private void OnEnable() => _inputMap.Enable();
 	private void OnDisabel() => _inputMap.Disable();
@@ -16,12 +19,14 @@ public class PlayerInput : MonoBehaviour
 	{
 		_inputMap = new InputMap();
 		
+		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
+		_playerGravitation = GetComponent<PlayerGravitation>();
 		_playerMover = GetComponent<PlayerMover>();
 		_playerLook = GetComponent<PlayerLook>();
-		_playerGravitation = GetComponent<PlayerGravitation>();
-		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
+		_playerJumper = GetComponent<PlayerJumper>();
 		
 		_inputMap.PlayScene.Sprint.performed += context => _playerMover.Sprint();
+		_inputMap.PlayScene.Jump.performed += context => _playerJumper.Jump();
 	}
 	
 	private void Update()
