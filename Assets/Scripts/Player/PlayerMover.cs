@@ -14,7 +14,8 @@ public class PlayerMover : MonoBehaviour
 	
 	private bool _isPlayerSprinting = false;
 	
-	private void Awake() {
+	private void Awake()
+	{
 		_characterController = GetComponent<CharacterController>();
 		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
 		

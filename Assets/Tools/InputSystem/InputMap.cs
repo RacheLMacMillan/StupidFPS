@@ -64,6 +64,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2e436b2-f2e7-4d57-a3c1-08e751a9c852"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""49505a02-c4bd-4474-acf6-c31a96f90b3f"",
@@ -170,6 +179,17 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4be02068-2280-4438-8e82-334ed541652a"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,6 +219,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_PlayScene_Move = m_PlayScene.FindAction("Move", throwIfNotFound: true);
         m_PlayScene_Jump = m_PlayScene.FindAction("Jump", throwIfNotFound: true);
         m_PlayScene_Sprint = m_PlayScene.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayScene_Crouch = m_PlayScene.FindAction("Crouch", throwIfNotFound: true);
         m_PlayScene_Dash = m_PlayScene.FindAction("Dash", throwIfNotFound: true);
         m_PlayScene_Shoot = m_PlayScene.FindAction("Shoot", throwIfNotFound: true);
     }
@@ -271,6 +292,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayScene_Move;
     private readonly InputAction m_PlayScene_Jump;
     private readonly InputAction m_PlayScene_Sprint;
+    private readonly InputAction m_PlayScene_Crouch;
     private readonly InputAction m_PlayScene_Dash;
     private readonly InputAction m_PlayScene_Shoot;
     public struct PlaySceneActions
@@ -281,6 +303,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayScene_Move;
         public InputAction @Jump => m_Wrapper.m_PlayScene_Jump;
         public InputAction @Sprint => m_Wrapper.m_PlayScene_Sprint;
+        public InputAction @Crouch => m_Wrapper.m_PlayScene_Crouch;
         public InputAction @Dash => m_Wrapper.m_PlayScene_Dash;
         public InputAction @Shoot => m_Wrapper.m_PlayScene_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_PlayScene; }
@@ -304,6 +327,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -326,6 +352,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -364,6 +393,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
     }

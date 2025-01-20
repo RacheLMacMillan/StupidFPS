@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
 	private PlayerMover _playerMover;
 	private PlayerLook _playerLook;
 	private PlayerJumper _playerJumper;
+	private PlayerCrouching _playerCrouching;
 	
 	private void OnEnable() => _inputMap.Enable();
 	private void OnDisabel() => _inputMap.Disable();
@@ -24,9 +25,11 @@ public class PlayerInput : MonoBehaviour
 		_playerMover = GetComponent<PlayerMover>();
 		_playerLook = GetComponent<PlayerLook>();
 		_playerJumper = GetComponent<PlayerJumper>();
+		_playerCrouching = GetComponent<PlayerCrouching>();
 		
 		_inputMap.PlayScene.Sprint.performed += context => _playerMover.Sprint();
 		_inputMap.PlayScene.Jump.performed += context => _playerJumper.Jump();
+		_inputMap.PlayScene.Crouch.performed += context => _playerCrouching.Crouch();
 	}
 	
 	private void Update()
