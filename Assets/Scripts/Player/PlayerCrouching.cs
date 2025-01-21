@@ -1,6 +1,4 @@
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCrouching : MonoBehaviour
@@ -10,11 +8,11 @@ public class PlayerCrouching : MonoBehaviour
 	private CharacterController _characterController;
 	private Transform _camera;
 	
-	[SerializeField] private bool _isCrouching;
-	
 	private float _initializedBodySize;
 	private Vector3 _initializedBodyCenter;
 	private Vector3 _initializedCameraPosition;
+	
+	private bool _isCrouching;
 	
 	private void Awake()
 	{
