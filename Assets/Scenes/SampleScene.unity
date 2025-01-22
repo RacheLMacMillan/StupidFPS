@@ -1008,7 +1008,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _crouchingOffset: 0.5
-  _isCrouching: 0
 --- !u!1 &1638891572
 GameObject:
   m_ObjectHideFlags: 0
