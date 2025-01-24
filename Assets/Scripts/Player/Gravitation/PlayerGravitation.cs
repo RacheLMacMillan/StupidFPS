@@ -1,36 +1,32 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(PlayerGroundedChecker))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerGravitation : MonoBehaviour
 {
 	[SerializeField] private float _gravityValue;
 	[SerializeField] private float _passiveStress;
 	
-	private CharacterController _characterController;
-	private PlayerGroundedChecker _playerIsGoundedChecker;
+	private PlayerController _playerController;
 	
-	public Vector3 PlayerVelocity;
+	private CharacterController _characterController;
 	
 	public void Awake()
 	{
+		_playerController = GetComponent<PlayerController>();
 		_characterController = GetComponent<CharacterController>();
-		_playerIsGoundedChecker = GetComponent<PlayerGroundedChecker>();
 	}
 	
-	public void GravitatePlayer()
+	public void GravitatePlayer(Vector3 velocity, bool isGrounded)
 	{
-		PlayerVelocity.y += _gravityValue * Time.deltaTime;
+		velocity.y += _gravityValue * Time.deltaTime;
 		
-		if (_playerIsGoundedChecker.IsPlayerGrounded.Value)
+		if (isGrounded == true)
 		{
-			PlayerVelocity.y = _passiveStress;
+			velocity.y = _passiveStress;
 		}
+		
+		_playerController.PlayerVelocity.Value = new Vector3(0, velocity.y, 0);
 
-		_characterController.Move(PlayerVelocity * Time.deltaTime);
-	}
-	
-	public float GetGravityValue()
-	{
-		return _gravityValue;
+		_characterController.Move(velocity * Time.deltaTime);
 	}
 }

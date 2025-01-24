@@ -1,31 +1,33 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerGravitation), typeof(PlayerGroundedChecker))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerJumper : MonoBehaviour
 {
 	[SerializeField] private float _jumpForce;
 	
 	[SerializeField] private Vector3 _jumpingStartUp;
 	
-	private PlayerGroundedChecker _playerGroundedChecker;
-	private PlayerGravitation _playerGravitation;
+	private PlayerController _playerController;
 
 	public void Awake()
 	{
-		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
-		_playerGravitation = GetComponent<PlayerGravitation>();
+		_playerController = GetComponent<PlayerController>();
 	}
 	
-	public void Jump()
-	{		
-		if (_playerGroundedChecker.IsPlayerGrounded.Value == false)
+	public void Jump(Vector3 playerVelocity, bool isGrounded)
+	{	
+		Debug.Log("Jumping");
+		if (isGrounded == false)
 		{
 			throw new ArgumentException();
 		}
 		
 		transform.position += _jumpingStartUp;
 		
-		_playerGravitation.PlayerVelocity.y = Mathf.Sqrt(-_jumpForce * _playerGravitation.GetGravityValue());
+		playerVelocity.y = Mathf.Sqrt(-_jumpForce * -9.8f);
+		
+		_playerController.PlayerVelocity.Value = playerVelocity;
+		Debug.Log("Jumped");
 	}
 }
