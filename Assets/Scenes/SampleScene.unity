@@ -1018,22 +1018,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1317052757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3653938b0ca17e4fb54d009145e8a9e, type: 3}
+  m_Script: {fileID: 11500000, guid: a58bc53ee07c02b4c9fa9c2426cc4e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravitationValue: 0
-  _moveSpeed: 0
-  _jumpForce: 0
-  _sprintingSpeed: 0
-  _crouchingSpeed: 0
-  _jumpingStartUp: {x: 0, y: 0, z: 0}
-  _isGrounded: 0
-  _isSprinting: 0
-  _isCrouching: 0
-  _sensitivityByX: 0
-  _sensitivityByY: 0
-  _minVerticalRotation: 0
-  _maxVerticalRotation: 0
 --- !u!1 &1638891572
 GameObject:
   m_ObjectHideFlags: 0
