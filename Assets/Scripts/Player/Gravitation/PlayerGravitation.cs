@@ -8,12 +8,9 @@ public class PlayerGravitation : MonoBehaviour
 	
 	private PlayerController _playerController;
 	
-	private CharacterController _characterController;
-	
 	public void Awake()
 	{
 		_playerController = GetComponent<PlayerController>();
-		_characterController = GetComponent<CharacterController>();
 	}
 	
 	public void GravitatePlayer(Vector3 velocity, bool isGrounded)
@@ -26,7 +23,5 @@ public class PlayerGravitation : MonoBehaviour
 		}
 		
 		_playerController.PlayerVelocity.Value = new Vector3(0, velocity.y, 0);
-
-		_characterController.Move(velocity * Time.deltaTime);
 	}
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerGravitation), typeof(PlayerGroundedChecker))]
 [RequireComponent(typeof(PlayerMover), typeof(PlayerLook), typeof(PlayerJumper))]
+[RequireComponent(typeof(PlayerSprinter))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
 	public ReactiveProperty<float> MoveSpeed = new();
@@ -9,13 +11,15 @@ public class PlayerController : MonoBehaviour
 	
 	public ReactiveProperty<Vector3> PlayerVelocity = new();
 	
-	public PlayerGroundedChecker _playerGroundedChecker {get; private set;}
-	public PlayerGravitation _playerGravitation {get; private set;}
-	public PlayerMover _playerMover {get; private set;}
-	public PlayerLook _playerLook {get; private set;}
-	public PlayerJumper _playerJumper {get; private set;}
-	public PlayerCrouching _playerCrouching {get; private set;}
-	public PlayerSprinter _playerSprinter {get; private set;}
+	public PlayerGroundedChecker _playerGroundedChecker { get; private set; }
+	public PlayerGravitation _playerGravitation { get; private set; }
+	public PlayerMover _playerMover { get; private set; }
+	public PlayerLook _playerLook { get; private set; }
+	public PlayerJumper _playerJumper { get; private set; }
+	public PlayerCrouching _playerCrouching { get; private set; }
+	public PlayerSprinter _playerSprinter { get; private set; }
+	
+	public CharacterController _characterController { get; private set; }
 	
 	private void OnEnable()
 	{
@@ -36,6 +40,8 @@ public class PlayerController : MonoBehaviour
 		_playerJumper = GetComponent<PlayerJumper>();
 		_playerCrouching = GetComponent<PlayerCrouching>();
 		_playerSprinter = GetComponent<PlayerSprinter>();
+		
+		_characterController = GetComponent<CharacterController>();
 	}
 	
 	private void Update()
@@ -47,7 +53,12 @@ public class PlayerController : MonoBehaviour
 		Debug.Log(PlayerVelocity.Value);
 	}
 	
-	public void OnMove(Vector2 direction)
+	public void OnMoveByTransoformDirection(Vector3 direction)
+	{
+		_playerMover.MoveByTransoformDirection(direction);
+	}
+	
+	public void OnMove(Vector3 direction)
 	{
 		_playerMover.Move(direction);
 	}

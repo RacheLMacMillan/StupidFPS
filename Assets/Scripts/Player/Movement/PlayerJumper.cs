@@ -9,10 +9,12 @@ public class PlayerJumper : MonoBehaviour
 	[SerializeField] private Vector3 _jumpingStartUp;
 	
 	private PlayerController _playerController;
+	private CharacterController _characterController;
 
 	public void Awake()
 	{
 		_playerController = GetComponent<PlayerController>();
+		_characterController = GetComponent<CharacterController>();
 	}
 	
 	public void Jump(Vector3 playerVelocity, bool isGrounded)
@@ -28,6 +30,7 @@ public class PlayerJumper : MonoBehaviour
 		playerVelocity.y = Mathf.Sqrt(-_jumpForce * -9.8f);
 		
 		_playerController.PlayerVelocity.Value = playerVelocity;
-		Debug.Log("Jumped");
+		
+		_playerController.OnMove(playerVelocity * Time.deltaTime);
 	}
 }
