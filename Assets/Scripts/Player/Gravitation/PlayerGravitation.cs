@@ -22,6 +22,8 @@ public class PlayerGravitation : MonoBehaviour
 			velocity.y = _passiveStress;
 		}
 		
+		_playerController.OnMove(velocity);
+		
 		_playerController.PlayerVelocity.Value = new Vector3(0, velocity.y, 0);
 	}
 }

@@ -1,19 +1,27 @@
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
 public class PlayerGroundedChecker : MonoBehaviour
 {	
 	[SerializeField] private LayerMask _toStandLayer;
 	
-	[SerializeField] private Vector3 _radiusOfCheck;
-		
+	[SerializeField] private float _radiusOfCheck;
+	
 	public bool CheckIsGrounded()
 	{
-		return Physics.CheckBox(transform.position, _radiusOfCheck, transform.rotation, _toStandLayer);
+		return Physics.CheckSphere(ScalePostition(), _radiusOfCheck, _toStandLayer);
 	}
 	
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;
-		Gizmos.DrawWireCube(transform.position, _radiusOfCheck);
+		Gizmos.DrawWireSphere(ScalePostition(), _radiusOfCheck);
+	}
+	
+	private Vector3 ScalePostition()
+	{
+		Vector3 playerPosition = transform.localPosition;
+		
+		return new Vector3(playerPosition.x, playerPosition.y + _radiusOfCheck - 0.01f, playerPosition.z);
 	}
 }

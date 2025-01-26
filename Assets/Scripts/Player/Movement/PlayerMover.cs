@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
 	[SerializeField] private float _playerSpeed;
-	[SerializeField] private float _speedMultiplier = 1f;
 	
 	private CharacterController _characterController;
 		

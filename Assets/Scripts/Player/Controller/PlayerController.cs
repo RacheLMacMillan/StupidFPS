@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public ReactiveProperty<float> MoveSpeed = new();
+	
 	public ReactiveProperty<bool> IsGrounded = new();
 	
 	public ReactiveProperty<Vector3> PlayerVelocity = new();
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
 	}
 	
 	private void Awake()
-	{
+	{	
 		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
 		_playerGravitation = GetComponent<PlayerGravitation>();
 		_playerMover = GetComponent<PlayerMover>();
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
 		
 		_playerGravitation.GravitatePlayer(PlayerVelocity.Value, IsGrounded.Value);
 		
-		Debug.Log(PlayerVelocity.Value);
+		Debug.Log(IsGrounded.Value);
 	}
 	
 	public void OnMoveByTransoformDirection(Vector3 direction)

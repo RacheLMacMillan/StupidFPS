@@ -5647,7 +5647,8 @@ MonoBehaviour:
   _toStandLayer:
     serializedVersion: 2
     m_Bits: 2048
-  _radiusOfCheck: {x: 0.1, y: 0.0001, z: 0.1}
+  _radiusOfCheck: 0.5
+  _boxOfCheck: {x: 0.5, y: 0.01, z: 0.5}
 --- !u!114 &1317052764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5661,7 +5662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityValue: -9.8
-  _passiveStress: -3
+  _passiveStress: -25
 --- !u!114 &1317052765
 MonoBehaviour:
   m_ObjectHideFlags: 0
