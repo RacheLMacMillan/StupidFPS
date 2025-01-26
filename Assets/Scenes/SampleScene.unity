@@ -5590,7 +5590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 10
-  _speedMultiplier: 1
 --- !u!114 &1317052761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5648,7 +5647,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   _radiusOfCheck: 0.5
-  _boxOfCheck: {x: 0.5, y: 0.01, z: 0.5}
 --- !u!114 &1317052764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5662,7 +5660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityValue: -9.8
-  _passiveStress: -25
+  _passiveStress: -2.5
 --- !u!114 &1317052765
 MonoBehaviour:
   m_ObjectHideFlags: 0
