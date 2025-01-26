@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCrouching : MonoBehaviour
 {	
+	public readonly ReactiveProperty<bool> IsCrouching = new();
+	
 	[SerializeField, Range(0, 1)] private float _crouchingOffset;
 	
 	private CharacterController _characterController;
@@ -11,8 +13,6 @@ public class PlayerCrouching : MonoBehaviour
 	private float _initializedBodySize;
 	private Vector3 _initializedBodyCenter;
 	private Vector3 _initializedCameraPosition;
-	
-	private bool _isCrouching;
 	
 	private void Awake()
 	{
@@ -26,9 +26,9 @@ public class PlayerCrouching : MonoBehaviour
 	
 	public void Crouch()
 	{
-		_isCrouching = !_isCrouching;
+		IsCrouching.Value = !IsCrouching.Value;
 		
-		if (_isCrouching == true)
+		if (IsCrouching.Value == true)
 		{
 			_characterController.height *= _crouchingOffset;
 			_characterController.center = new Vector3(0, _characterController.center.y * _crouchingOffset, 0);

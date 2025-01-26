@@ -2,14 +2,16 @@ using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
 public class PlayerGroundedChecker : MonoBehaviour
-{	
+{
+	public readonly ReactiveProperty<bool> IsGrounded = new();
+	
 	[SerializeField] private LayerMask _toStandLayer;
 	
 	[SerializeField] private float _radiusOfCheck;
 	
-	public bool CheckIsGrounded()
+	public void CheckIsGrounded()
 	{
-		return Physics.CheckSphere(ScalePostition(), _radiusOfCheck, _toStandLayer);
+		IsGrounded.Value = Physics.CheckSphere(ScalePostition(), _radiusOfCheck, _toStandLayer);
 	}
 	
 	private void OnDrawGizmos()

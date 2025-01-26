@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerGravitation), typeof(PlayerGroundedChecker))]
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
 	public ReactiveProperty<float> MoveSpeed = new();
 	
 	public ReactiveProperty<bool> IsGrounded = new();
+	public ReactiveProperty<bool> IsCrounching = new();
 	
 	public ReactiveProperty<Vector3> PlayerVelocity = new();
 	
@@ -24,12 +26,14 @@ public class PlayerController : MonoBehaviour
 	
 	private void OnEnable()
 	{
-		
+		_playerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
+		_playerCrouching.IsCrouching.OnChanged += OnCrouchingChanged;
 	}
 	
 	private void OnDisable()
 	{
-		
+		_playerGroundedChecker.IsGrounded.OnChanged -= OnIsGroundedChanged;
+		_playerCrouching.IsCrouching.OnChanged -= OnCrouchingChanged;
 	}
 	
 	private void Awake()
@@ -47,11 +51,9 @@ public class PlayerController : MonoBehaviour
 	
 	private void Update()
 	{
-		IsGrounded.Value = _playerGroundedChecker.CheckIsGrounded();
+		_playerGroundedChecker.CheckIsGrounded();
 		
 		_playerGravitation.GravitatePlayer(PlayerVelocity.Value, IsGrounded.Value);
-		
-		Debug.Log(IsGrounded.Value);
 	}
 	
 	public void OnMoveByTransoformDirection(Vector3 direction)
@@ -84,8 +86,13 @@ public class PlayerController : MonoBehaviour
 		_playerCrouching.Crouch();
 	}
 	
-	private void OnPlayerVelocityChanged(Vector3 velocity)
+	private void OnIsGroundedChanged(bool value)
 	{
-		PlayerVelocity.Value = velocity;
+		IsGrounded.Value = value;
+	}
+	
+	private void OnCrouchingChanged(bool value)
+	{
+		IsCrounching.Value = value;
 	}
 }
