@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour
 	public PlayerCrouching _playerCrouching { get; private set; }
 	public PlayerSprinter _playerSprinter { get; private set; }
 	
-	public CharacterController _characterController { get; private set; }
-	
 	private void OnEnable()
 	{
 		_playerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
@@ -44,8 +42,6 @@ public class PlayerController : MonoBehaviour
 		_playerJumper = GetComponent<PlayerJumper>();
 		_playerCrouching = GetComponent<PlayerCrouching>();
 		_playerSprinter = GetComponent<PlayerSprinter>();
-		
-		_characterController = GetComponent<CharacterController>();
 	}
 	
 	private void Update()
