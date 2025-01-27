@@ -32,7 +32,7 @@ public class PlayerCrouching : MonoBehaviour
 	
 	public void Crouch()
 	{
-		if (IsCanStandUp() == true)
+		if (CantStandUp() == true)
 		{
 			throw new ArgumentException("Something is interfering from above.");
 		}
@@ -55,7 +55,7 @@ public class PlayerCrouching : MonoBehaviour
 		}
 	}
 	
-	private bool IsCanStandUp()
+	private bool CantStandUp()
 	{
 		return Physics.CheckSphere(ScalePostition(), _radiusOfStandUpCheck, _groundLayer);
 	}
