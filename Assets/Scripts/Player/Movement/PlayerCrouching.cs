@@ -1,3 +1,5 @@
+using System;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -6,6 +8,10 @@ public class PlayerCrouching : MonoBehaviour
 	public readonly ReactiveProperty<bool> IsCrouching = new();
 	
 	[SerializeField, Range(0, 1)] private float _crouchingOffset;
+	[SerializeField] private LayerMask _groundLayer;
+	
+	[SerializeField] private Vector3 _standUpCheckPosition;
+	[SerializeField] private float _radiusOfStandUpCheck;
 	
 	private CharacterController _characterController;
 	private Transform _camera;
@@ -26,6 +32,11 @@ public class PlayerCrouching : MonoBehaviour
 	
 	public void Crouch()
 	{
+		if (IsCanStandUp() == true)
+		{
+			throw new ArgumentException("Something is interfering from above.");
+		}
+		
 		IsCrouching.Value = !IsCrouching.Value;
 		
 		if (IsCrouching.Value == true)
@@ -42,5 +53,23 @@ public class PlayerCrouching : MonoBehaviour
 			
 			_camera.localPosition = _initializedCameraPosition;
 		}
+	}
+	
+	private bool IsCanStandUp()
+	{
+		return Physics.CheckSphere(ScalePostition(), _radiusOfStandUpCheck, _groundLayer);
+	}
+	
+	private Vector3 ScalePostition()
+	{
+		Vector3 playerPosition = transform.localPosition;
+		
+		return new Vector3(playerPosition.x, playerPosition.y + _standUpCheckPosition.y, playerPosition.z);
+	}
+	
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.green;
+		Gizmos.DrawWireSphere(ScalePostition(), _radiusOfStandUpCheck);
 	}
 }
