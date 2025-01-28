@@ -17,9 +17,9 @@ public class PlayerInput : MonoBehaviour
 		
 		_playerController = GetComponent<PlayerController>();
 		
-		playSceneActions.Sprint.performed += context => _playerController.OnSprint();
 		playSceneActions.Jump.performed += context => _playerController.OnJump();
 		playSceneActions.Crouch.performed += context => _playerController.OnCrouch();
+		playSceneActions.Sprint.performed += context => _playerController.OnSprint();
 	}
 	
 	private void Update()

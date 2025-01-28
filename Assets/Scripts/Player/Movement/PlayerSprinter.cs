@@ -1,23 +1,28 @@
+using System;
 using UnityEngine;
 
 public class PlayerSprinter : MonoBehaviour
 {
-	public void Sprint()
+	public readonly ReactiveProperty<bool> IsSprinting = new();
+	
+	private PlayerController _playerController;
+	
+	private void Awake()
 	{
-		// if(_playerGroundedChecker.IsPlayerGrounded.Value == false)
-		// {
-		// 	throw new ArgumentException($"{gameObject.name} is not on the ground.");
-		// }
+		_playerController = GetComponent<PlayerController>();
+	}
+	
+	public void ChangeIsSprintValue()
+	{
+		if (_playerController.IsGrounded.Value == false)
+		{
+			throw new ArgumentException($"{gameObject.name} is not on the ground.");
+		}
+		if (_playerController.IsCrounching.Value == true)
+		{
+			throw new ArgumentException($"{gameObject.name} is crouching.");
+		}
 		
-		// _isPlayerSprinting = !_isPlayerSprinting;
-		
-		// if(_isPlayerSprinting == true)
-		// {
-		// 	_speedMultiplier = 1.5f;
-		// }
-		// else
-		// {
-		// 	_speedMultiplier = 1f;
-		// }
+		IsSprinting.Value = !IsSprinting.Value;
 	}
 }

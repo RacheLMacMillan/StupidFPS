@@ -12,6 +12,7 @@ public class PlayerCrouching : MonoBehaviour
 	[SerializeField] private Vector3 _standUpCheckPosition;
 	[SerializeField] private float _radiusOfStandUpCheck;
 	
+	private PlayerController _playerController;
 	private CharacterController _characterController;
 	private Transform _camera;
 	
@@ -21,6 +22,7 @@ public class PlayerCrouching : MonoBehaviour
 	
 	private void Awake()
 	{
+		_playerController = GetComponent<PlayerController>();
 		_characterController = GetComponent<CharacterController>();
 		_camera = GetComponentInChildren<Camera>().GetComponent<Transform>();
 		
@@ -34,6 +36,10 @@ public class PlayerCrouching : MonoBehaviour
 		if (CantStandUp() == true)
 		{
 			throw new ArgumentException("Something is interfering from above.");
+		}
+		if (_playerController.IsSprinting.Value == true)
+		{
+			throw new ArgumentException($"{gameObject.name} is sprinting.");
 		}
 		
 		IsCrouching.Value = !IsCrouching.Value;

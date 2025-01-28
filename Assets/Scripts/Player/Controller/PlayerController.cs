@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerGravitation), typeof(PlayerGroundedChecker))]
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
 	
 	public ReactiveProperty<bool> IsGrounded = new();
 	public ReactiveProperty<bool> IsCrounching = new();
+	public ReactiveProperty<bool> IsSprinting = new();
 	
 	public ReactiveProperty<Vector3> PlayerVelocity = new();
 	
@@ -26,12 +28,14 @@ public class PlayerController : MonoBehaviour
 	{
 		_playerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
 		_playerCrouching.IsCrouching.OnChanged += OnCrouchingChanged;
+		_playerSprinter.IsSprinting.OnChanged += OnSprintChanged;
 	}
 	
 	private void OnDisable()
 	{
 		_playerGroundedChecker.IsGrounded.OnChanged -= OnIsGroundedChanged;
 		_playerCrouching.IsCrouching.OnChanged -= OnCrouchingChanged;
+		_playerSprinter.IsSprinting.OnChanged -= OnSprintChanged;
 	}
 	
 	private void Awake()
@@ -69,7 +73,7 @@ public class PlayerController : MonoBehaviour
 	
 	public void OnSprint()
 	{
-		_playerSprinter.Sprint();
+		_playerSprinter.ChangeIsSprintValue();
 	}
 	
 	public void OnJump()
@@ -90,5 +94,10 @@ public class PlayerController : MonoBehaviour
 	private void OnCrouchingChanged(bool value)
 	{
 		IsCrounching.Value = value;
+	}
+	
+	private void OnSprintChanged(bool value)
+	{
+		IsSprinting.Value = value;
 	}
 }

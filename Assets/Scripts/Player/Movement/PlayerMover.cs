@@ -1,16 +1,31 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerGroundedChecker))]
 public class PlayerMover : MonoBehaviour
 {
-	[SerializeField] private float _playerSpeed;
+	[SerializeField] private float _moveSpeed;
 	
+	private float _defaulMoveSpeed;
+	
+	private PlayerController _playerController;
 	private CharacterController _characterController;
 		
 	private void Awake()
 	{
+		_playerController = GetComponent<PlayerController>();
 		_characterController = GetComponent<CharacterController>();
+	}
+	
+	private void OnEnable()
+	{
+		_playerController.IsCrounching.OnChanged += OnIsCrouchingChanged;
+		_playerController.IsSprinting.OnChanged += OnIsSprintingChanged;
+	}
+	
+	private void OnDisable()
+	{
+		_playerController.IsCrounching.OnChanged -= OnIsCrouchingChanged;
+		_playerController.IsSprinting.OnChanged -= OnIsSprintingChanged;
 	}
 	
 	public void Move(Vector3 direction)
@@ -20,10 +35,36 @@ public class PlayerMover : MonoBehaviour
 	
 	public void MoveByTransoformDirection(Vector3 direction)
 	{
-		float scaledSpeed = _playerSpeed * Time.deltaTime;
+		float scaledSpeed = _moveSpeed * Time.deltaTime;
 				
 		Vector3 scaledMoveDirection = direction * scaledSpeed;
 		
 		_characterController.Move(transform.TransformDirection(scaledMoveDirection));
+	}
+	
+	private void OnIsCrouchingChanged(bool value)
+	{
+		if (value == true)
+		{
+			_defaulMoveSpeed = _moveSpeed;
+			_moveSpeed /= 2;
+		}
+		else
+		{
+			_moveSpeed = _defaulMoveSpeed;
+		}
+	}
+	
+	private void OnIsSprintingChanged(bool value)
+	{
+		if (value == true)
+		{
+			_defaulMoveSpeed = _moveSpeed;
+			_moveSpeed *= 2;
+		}
+		else
+		{
+			_moveSpeed = _defaulMoveSpeed;
+		}
 	}
 }
