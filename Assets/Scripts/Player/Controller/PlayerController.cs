@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+	public ReactiveProperty<float> GravityValue = new();
 	public ReactiveProperty<float> MoveSpeed = new();
 	
 	public ReactiveProperty<bool> IsGrounded = new();
@@ -13,13 +14,13 @@ public class PlayerController : MonoBehaviour
 	
 	public ReactiveProperty<Vector3> PlayerVelocity = new();
 	
-	public PlayerGroundedChecker _playerGroundedChecker { get; private set; }
-	public PlayerGravitation _playerGravitation { get; private set; }
-	public PlayerMover _playerMover { get; private set; }
-	public PlayerLook _playerLook { get; private set; }
-	public PlayerJumper _playerJumper { get; private set; }
-	public PlayerCrouching _playerCrouching { get; private set; }
-	public PlayerSprinter _playerSprinter { get; private set; }
+	private PlayerGroundedChecker _playerGroundedChecker;
+	private PlayerGravitation _playerGravitation;
+	private PlayerMover _playerMover;
+	private PlayerLook _playerLook;
+	private PlayerJumper _playerJumper;
+	private PlayerCrouching _playerCrouching;
+	private PlayerSprinter _playerSprinter;
 	
 	private void OnEnable()
 	{

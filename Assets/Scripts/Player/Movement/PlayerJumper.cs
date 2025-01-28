@@ -18,8 +18,7 @@ public class PlayerJumper : MonoBehaviour
 	}
 	
 	public void Jump(Vector3 playerVelocity, bool isGrounded)
-	{	
-		Debug.Log("Jumping");
+	{
 		if (isGrounded == false)
 		{
 			throw new ArgumentException();
