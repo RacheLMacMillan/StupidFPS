@@ -6106,7 +6106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cb6cd5c8122df4393947e6a4a40be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpeed: 10
+  _moveSpeed: 10
 --- !u!114 &1317052761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6176,7 +6176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e431dc0c21bfd47ad8ad51b973fe5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravityValue: -9.8
+  _inspectGravityValue: -9.8
   _passiveStress: -2.5
 --- !u!114 &1317052765
 MonoBehaviour:
@@ -6229,7 +6229,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317052757}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55722d9265bbc5a4db06657f4123f5c8, type: 3}
   m_Name: 
