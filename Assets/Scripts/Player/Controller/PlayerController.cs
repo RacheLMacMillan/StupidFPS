@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
 	private PlayerJumper _playerJumper;
 	private PlayerCrouching _playerCrouching;
 	private PlayerSprinter _playerSprinter;
-	
-	private void OnEnable()
+
+    private void OnEnable()
 	{
 		_playerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
 		_playerCrouching.IsCrouching.OnChanged += OnCrouchingChanged;

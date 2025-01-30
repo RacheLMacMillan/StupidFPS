@@ -1,16 +1,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerGroundedChecker))]
-public class PlayerMover : MonoBehaviour
+public class PlayerMover : MonoBehaviour, IMoveable
 {
-	[SerializeField] private float _moveSpeed;
+	[field: SerializeField] public float MoveSpeed { get; set; }
 	
 	private float _defaulMoveSpeed;
 	
 	private PlayerController _playerController;
 	private CharacterController _characterController;
-		
-	private void Awake()
+
+    private void Awake()
 	{
 		_playerController = GetComponent<PlayerController>();
 		_characterController = GetComponent<CharacterController>();
@@ -35,7 +35,7 @@ public class PlayerMover : MonoBehaviour
 	
 	public void MoveByTransoformDirection(Vector3 direction)
 	{
-		float scaledSpeed = _moveSpeed * Time.deltaTime;
+		float scaledSpeed = MoveSpeed * Time.deltaTime;
 				
 		Vector3 scaledMoveDirection = direction * scaledSpeed;
 		
@@ -46,12 +46,12 @@ public class PlayerMover : MonoBehaviour
 	{
 		if (value == true)
 		{
-			_defaulMoveSpeed = _moveSpeed;
-			_moveSpeed /= 2;
+			_defaulMoveSpeed = MoveSpeed;
+			MoveSpeed /= 2;
 		}
 		else
 		{
-			_moveSpeed = _defaulMoveSpeed;
+			MoveSpeed = _defaulMoveSpeed;
 		}
 	}
 	
@@ -59,12 +59,12 @@ public class PlayerMover : MonoBehaviour
 	{
 		if (value == true)
 		{
-			_defaulMoveSpeed = _moveSpeed;
-			_moveSpeed *= 2;
+			_defaulMoveSpeed = MoveSpeed;
+			MoveSpeed *= 2;
 		}
 		else
 		{
-			_moveSpeed = _defaulMoveSpeed;
+			MoveSpeed = _defaulMoveSpeed;
 		}
 	}
 }
