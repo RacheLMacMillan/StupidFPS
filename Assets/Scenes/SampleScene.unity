@@ -6140,7 +6140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cb6cd5c8122df4393947e6a4a40be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 10
+  <MoveSpeed>k__BackingField: 7.5
+  <CrouncingSpeedMultiplayer>k__BackingField: 0.5
+  <SprintingSpeedMultiplayer>k__BackingField: 1.5
 --- !u!114 &1317052761
 MonoBehaviour:
   m_ObjectHideFlags: 0
