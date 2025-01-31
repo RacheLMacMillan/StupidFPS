@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerGravitation), typeof(PlayerGroundedChecker))]

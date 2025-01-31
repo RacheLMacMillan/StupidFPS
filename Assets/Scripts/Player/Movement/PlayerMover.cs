@@ -1,9 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerGroundedChecker))]
-public class PlayerMover : MonoBehaviour, IMoveable
+public class PlayerMover : MonoBehaviour
 {
-	[field: SerializeField] public float MoveSpeed { get; set; }
+	[field: SerializeField] public float MoveSpeed { get; private set; }
+	[field: SerializeField, Range(0, 1)] public float CrouncingSpeedMultiplayer { get; private set; }
+	[field: SerializeField, Range(1, 2)] public float SprintingSpeedMultiplayer { get; private set; }
 	
 	private float _defaulMoveSpeed;
 	
@@ -47,7 +49,7 @@ public class PlayerMover : MonoBehaviour, IMoveable
 		if (value == true)
 		{
 			_defaulMoveSpeed = MoveSpeed;
-			MoveSpeed /= 2;
+			MoveSpeed *= CrouncingSpeedMultiplayer;
 		}
 		else
 		{
@@ -60,7 +62,7 @@ public class PlayerMover : MonoBehaviour, IMoveable
 		if (value == true)
 		{
 			_defaulMoveSpeed = MoveSpeed;
-			MoveSpeed *= 2;
+			MoveSpeed *= SprintingSpeedMultiplayer;
 		}
 		else
 		{
