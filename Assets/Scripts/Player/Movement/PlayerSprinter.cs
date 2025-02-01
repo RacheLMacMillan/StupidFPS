@@ -18,7 +18,7 @@ public class PlayerSprinter : MonoBehaviour
 		{
 			throw new ArgumentException($"{gameObject.name} is not on the ground.");
 		}
-		if (_playerController.IsCrounching.Value == true)
+		if (_playerController.IsCrouching.Value == true)
 		{
 			throw new ArgumentException($"{gameObject.name} is crouching.");
 		}

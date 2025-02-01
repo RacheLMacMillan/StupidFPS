@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
 	{
 		Vector3 correctMoveDirection = CorrectMoveDirection(_inputMap.PlayScene.Move.ReadValue<Vector2>());
 		
-		_playerController.OnMoveByTransoformDirection(correctMoveDirection);
+		_playerController.OnMoveByTransformDirection(correctMoveDirection);
 		_playerController.OnLook(_inputMap.PlayScene.Look.ReadValue<Vector2>());	
 	}
 	
