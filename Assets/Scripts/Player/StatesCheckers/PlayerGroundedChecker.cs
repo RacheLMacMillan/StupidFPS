@@ -10,16 +10,16 @@ public class PlayerGroundedChecker : MonoBehaviour
 	
 	public void CheckIsGrounded()
 	{
-		IsGrounded.Value = Physics.CheckSphere(ScalePostition(), _radiusOfCheck, _toStandLayer);
+		IsGrounded.Value = Physics.CheckSphere(ScalePosition(), _radiusOfCheck, _toStandLayer);
 	}
 	
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(ScalePostition(), _radiusOfCheck);
+		Gizmos.DrawWireSphere(ScalePosition(), _radiusOfCheck);
 	}
 	
-	private Vector3 ScalePostition()
+	private Vector3 ScalePosition()
 	{
 		Vector3 playerPosition = transform.localPosition;
 		
