@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(PlayerGroundedChecker))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMover : MonoBehaviour
 {
 	[field: SerializeField] public float MoveSpeed { get; private set; }
-	[field: SerializeField, Range(0.25f, 1)] public float CrouchingSpeedMultiplayer { get; private set; }
-	[field: SerializeField, Range(1, 2)] public float SprintingSpeedMultiplayer { get; private set; }
+	
+	[SerializeField, Range(0.25f, 1)] private float CrouchingSpeedMultiplayer;
+	[SerializeField, Range(1, 2)] private float SprintingSpeedMultiplayer;
 	
 	private float _crouchingSpeed => MoveSpeed * CrouchingSpeedMultiplayer;
 	private float _sprintingSpeed => MoveSpeed * SprintingSpeedMultiplayer;
