@@ -22,6 +22,8 @@ public class PlayerViewModel : MonoBehaviour
 	private PlayerJumper _playerJumper;
 	private PlayerCrouching _playerCrouching;
 	private PlayerSprinter _playerSprinter;
+	
+	private PlayerStateMachine _playerStateMachine;
 
 	private void OnEnable()
 	{
@@ -39,6 +41,8 @@ public class PlayerViewModel : MonoBehaviour
 	
 	private void Awake()
 	{	
+		// _playerStateMachine = new PlayerStateMachine(this);
+		
 		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
 		_playerGravitation = GetComponent<PlayerGravitation>();
 		_playerMover = GetComponent<PlayerMover>();

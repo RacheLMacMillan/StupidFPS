@@ -4,11 +4,12 @@ using System;
 
 public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
 {
+	public BaseState<EState> CurrentState { get; protected set; }
+	
 	protected Dictionary<EState, BaseState<EState>> States = new Dictionary<EState, BaseState<EState>>();
 	
-	protected BaseState<EState> CurrentState;
-	
 	protected bool IsTransitioningState = false;
+	
 	
 	private void Start()
 	{
@@ -42,20 +43,5 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
 		CurrentState.EnterState();
 		
 		IsTransitioningState = false;
-	}
-	
-	private void OnTriggerEnter(Collider other)
-	{
-		CurrentState.OnTriggerEnter(other);
-	}
-	
-	private void OnTriggerStay(Collider other)
-	{
-		CurrentState.OnTriggerStay(other);
-	}
-	
-	private void OnTriggerExit(Collider other)
-	{
-		CurrentState.OnTriggerExit(other);
 	}
 }
