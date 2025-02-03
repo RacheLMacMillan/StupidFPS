@@ -1,33 +1,23 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerGroundedChecker))]
 public class PlayerMover : MonoBehaviour
 {
 	[field: SerializeField] public float MoveSpeed { get; private set; }
-	[field: SerializeField, Range(0, 1)] public float CrouchingSpeedMultiplayer { get; private set; }
+	[field: SerializeField, Range(0.25f, 1)] public float CrouchingSpeedMultiplayer { get; private set; }
 	[field: SerializeField, Range(1, 2)] public float SprintingSpeedMultiplayer { get; private set; }
 	
-	private float _defaultMoveSpeed;
+	private float _crouchingSpeed => MoveSpeed * CrouchingSpeedMultiplayer;
+	private float _sprintingSpeed => MoveSpeed * SprintingSpeedMultiplayer;
 	
 	private PlayerViewModel _playerController;
 	private CharacterController _characterController;
 
-    private void Awake()
+	private void Awake()
 	{
 		_playerController = GetComponent<PlayerViewModel>();
 		_characterController = GetComponent<CharacterController>();
-	}
-	
-	private void OnEnable()
-	{
-		_playerController.IsCrouchingViewModel.OnChanged += OnIsCrouchingChanged;
-		_playerController.IsSprintingViewModel.OnChanged += OnIsSprintingChanged;
-	}
-	
-	private void OnDisable()
-	{
-		_playerController.IsCrouchingViewModel.OnChanged -= OnIsCrouchingChanged;
-		_playerController.IsSprintingViewModel.OnChanged -= OnIsSprintingChanged;
 	}
 	
 	public void Move(Vector3 direction)
@@ -36,37 +26,29 @@ public class PlayerMover : MonoBehaviour
 	}
 	
 	public void MoveByTransformDirection(Vector3 direction)
-	{
-		float scaledSpeed = MoveSpeed * Time.deltaTime;
-				
-		Vector3 scaledMoveDirection = direction * scaledSpeed;
+	{		
+		Vector3 scaledMoveDirection = direction * ScaleMoveSpeed();
 		
 		_characterController.Move(transform.TransformDirection(scaledMoveDirection));
 	}
-	
-	private void OnIsCrouchingChanged(bool value)
+
+	private float ScaleMoveSpeed()
 	{
-		if (value == true)
+		float scaledSpeed;
+		
+		if (_playerController.IsCrouchingViewModel.Value == true)
 		{
-			_defaultMoveSpeed = MoveSpeed;
-			MoveSpeed *= CrouchingSpeedMultiplayer;
+			scaledSpeed = _crouchingSpeed;
 		}
-		else
+		else if (_playerController.IsSprintingViewModel.Value == true)
 		{
-			MoveSpeed = _defaultMoveSpeed;
+			scaledSpeed = _sprintingSpeed;
 		}
-	}
-	
-	private void OnIsSprintingChanged(bool value)
-	{
-		if (value == true)
+		else	
 		{
-			_defaultMoveSpeed = MoveSpeed;
-			MoveSpeed *= SprintingSpeedMultiplayer;
+			scaledSpeed = MoveSpeed;
 		}
-		else
-		{
-			MoveSpeed = _defaultMoveSpeed;
-		}
+		
+		return scaledSpeed *= Time.deltaTime;
 	}
 }
