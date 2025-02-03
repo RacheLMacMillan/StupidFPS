@@ -9,25 +9,25 @@ public class PlayerMover : MonoBehaviour
 	
 	private float _defaultMoveSpeed;
 	
-	private PlayerController _playerController;
+	private PlayerViewModel _playerController;
 	private CharacterController _characterController;
 
     private void Awake()
 	{
-		_playerController = GetComponent<PlayerController>();
+		_playerController = GetComponent<PlayerViewModel>();
 		_characterController = GetComponent<CharacterController>();
 	}
 	
 	private void OnEnable()
 	{
-		_playerController.IsCrouching.OnChanged += OnIsCrouchingChanged;
-		_playerController.IsSprinting.OnChanged += OnIsSprintingChanged;
+		_playerController.IsCrouchingViewModel.OnChanged += OnIsCrouchingChanged;
+		_playerController.IsSprintingViewModel.OnChanged += OnIsSprintingChanged;
 	}
 	
 	private void OnDisable()
 	{
-		_playerController.IsCrouching.OnChanged -= OnIsCrouchingChanged;
-		_playerController.IsSprinting.OnChanged -= OnIsSprintingChanged;
+		_playerController.IsCrouchingViewModel.OnChanged -= OnIsCrouchingChanged;
+		_playerController.IsSprintingViewModel.OnChanged -= OnIsSprintingChanged;
 	}
 	
 	public void Move(Vector3 direction)

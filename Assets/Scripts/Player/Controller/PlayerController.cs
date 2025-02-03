@@ -4,16 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMover), typeof(PlayerLook), typeof(PlayerJumper))]
 [RequireComponent(typeof(PlayerSprinter))]
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerViewModel : MonoBehaviour
 {
-	public ReactiveProperty<float> GravityValue = new();
-	public ReactiveProperty<float> MoveSpeed = new();
+	public ReactiveProperty<float> GravityValueViewModel = new();
+	public ReactiveProperty<float> MoveSpeedViewModel = new();
 	
-	public ReactiveProperty<bool> IsGrounded = new();
-	public ReactiveProperty<bool> IsCrouching = new();
-	public ReactiveProperty<bool> IsSprinting = new();
+	public ReactiveProperty<bool> IsGroundedViewModel = new();
+	public ReactiveProperty<bool> IsCrouchingViewModel = new();
+	public ReactiveProperty<bool> IsSprintingViewModel = new();
 	
-	public ReactiveProperty<Vector3> PlayerVelocity = new();
+	public ReactiveProperty<Vector3> PlayerVelocityViewModel = new();
 	
 	private PlayerGroundedChecker _playerGroundedChecker;
 	private PlayerGravitation _playerGravitation;
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_playerGroundedChecker.CheckIsGrounded();
 		
-		_playerGravitation.GravitatePlayer(PlayerVelocity.Value, IsGrounded.Value);
+		_playerGravitation.GravitatePlayer(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
 	}
 	
 	public void OnMoveByTransformDirection(Vector3 direction)
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 	
 	public void OnJump()
 	{
-		_playerJumper.Jump(PlayerVelocity.Value, IsGrounded.Value);
+		_playerJumper.Jump(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
 	}
 	
 	public void OnCrouch()
@@ -87,16 +87,16 @@ public class PlayerController : MonoBehaviour
 	
 	private void OnIsGroundedChanged(bool value)
 	{
-		IsGrounded.Value = value;
+		IsGroundedViewModel.Value = value;
 	}
 	
 	private void OnCrouchingChanged(bool value)
 	{
-		IsCrouching.Value = value;
+		IsCrouchingViewModel.Value = value;
 	}
 	
 	private void OnSprintChanged(bool value)
 	{
-		IsSprinting.Value = value;
+		IsSprintingViewModel.Value = value;
 	}
 }
