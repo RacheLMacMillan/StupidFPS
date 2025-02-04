@@ -6142,8 +6142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MoveSpeed>k__BackingField: 7.5
-  CrouchingSpeedMultiplayer: 0.25
-  SprintingSpeedMultiplayer: 1
+  CrouchingSpeedMultiplayer: 0.5
+  SprintingSpeedMultiplayer: 1.5
 --- !u!114 &1317052761
 MonoBehaviour:
   m_ObjectHideFlags: 0
