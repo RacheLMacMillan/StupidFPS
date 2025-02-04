@@ -9,6 +9,8 @@ public class PlayerStateMachine : StateManager<EPlayerState>
 	
 	public void Awake()
 	{
+		_playerViewModel = GetComponent<PlayerViewModel>();
+		
 		ValidateConstraints();
 		
 		_context = new PlayerStateContext(_playerViewModel);

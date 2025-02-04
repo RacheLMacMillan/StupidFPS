@@ -40,9 +40,7 @@ public class PlayerViewModel : MonoBehaviour
 	}
 	
 	private void Awake()
-	{	
-		// _playerStateMachine = new PlayerStateMachine(this);
-		
+	{
 		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
 		_playerGravitation = GetComponent<PlayerGravitation>();
 		_playerMover = GetComponent<PlayerMover>();
