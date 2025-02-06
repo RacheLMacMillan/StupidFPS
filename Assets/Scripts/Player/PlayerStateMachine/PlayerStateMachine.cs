@@ -3,13 +3,13 @@ using UnityEngine.Assertions;
 
 public class PlayerStateMachine : StateManager<EPlayerState>
 {
-	[SerializeField] private PlayerViewModel _playerViewModel;
+	[SerializeField] private PlayerController _playerViewModel;
 	
 	private PlayerStateContext _context;
 	
 	public void Awake()
 	{
-		_playerViewModel = GetComponent<PlayerViewModel>();
+		_playerViewModel = GetComponent<PlayerController>();
 		
 		ValidateConstraints();
 		

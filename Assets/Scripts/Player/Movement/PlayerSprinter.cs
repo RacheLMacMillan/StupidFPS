@@ -5,11 +5,11 @@ public class PlayerSprinter : MonoBehaviour
 {
 	public readonly ReactiveProperty<bool> IsSprinting = new();
 	
-	private PlayerViewModel _playerController;
+	private PlayerController _playerController;
 	
 	private void Awake()
 	{
-		_playerController = GetComponent<PlayerViewModel>();
+		_playerController = GetComponent<PlayerController>();
 	}
 	
 	public void ChangeIsSprintValue()

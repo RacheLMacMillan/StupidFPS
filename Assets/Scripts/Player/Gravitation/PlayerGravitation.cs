@@ -1,16 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerViewModel))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerGravitation : MonoBehaviour
 {
 	[SerializeField] private float _inspectGravityValue;
 	[SerializeField] private float _passiveStress;
 	
-	private PlayerViewModel _playerController;
+	private PlayerController _playerController;
 	
-	public void Awake()
+	private void Awake()
 	{
-		_playerController = GetComponent<PlayerViewModel>();
+		_playerController = GetComponent<PlayerController>();
 	}
 	
 	public void GravitatePlayer(Vector3 velocity, bool isGrounded)

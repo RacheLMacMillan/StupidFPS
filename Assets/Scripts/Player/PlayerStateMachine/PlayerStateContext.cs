@@ -1,8 +1,8 @@
 public class PlayerStateContext
 {
-	public PlayerViewModel PlayerViewModelConstraint { get; private set; }
+	public PlayerController PlayerViewModelConstraint { get; private set; }
 	
-	public PlayerStateContext(PlayerViewModel playerViewModel)
+	public PlayerStateContext(PlayerController playerViewModel)
 	{
 		PlayerViewModelConstraint = playerViewModel;
 	}

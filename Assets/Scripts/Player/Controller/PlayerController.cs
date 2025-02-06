@@ -1,10 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerGravitation), typeof(PlayerGroundedChecker))]
-[RequireComponent(typeof(PlayerMover), typeof(PlayerLook), typeof(PlayerJumper))]
-[RequireComponent(typeof(PlayerSprinter))]
-[RequireComponent(typeof(CharacterController))]
-public class PlayerViewModel : MonoBehaviour
+public class PlayerController : MonoBehaviour, IInitializable
 {
 	public ReactiveProperty<float> GravityValueViewModel = new();
 	public ReactiveProperty<float> MoveSpeedViewModel = new();
@@ -22,6 +18,7 @@ public class PlayerViewModel : MonoBehaviour
 	public PlayerJumper PlayerJumper { get; private set; }
 	public PlayerCrouching PlayerCrouching { get; private set; }
 	public PlayerSprinter PlayerSprinter { get; private set; }
+	public CharacterController CharacterController { get; private set; }
 
 	private void OnEnable()
 	{
@@ -37,16 +34,22 @@ public class PlayerViewModel : MonoBehaviour
 		PlayerSprinter.IsSprinting.OnChanged -= OnSprintChanged;
 	}
 	
-	private void Awake()
-	{
-		InitializePlayer();
-	}
-	
 	private void Update()
 	{
 		PlayerGroundedChecker.CheckIsGrounded();
 		
 		PlayerGravitation.GravitatePlayer(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
+	}
+	
+	public void Initialize()
+	{
+		PlayerGroundedChecker = GetComponent<PlayerGroundedChecker>();
+		PlayerGravitation = GetComponent<PlayerGravitation>();
+		PlayerMover = GetComponent<PlayerMover>();
+		PlayerLook = GetComponent<PlayerLook>();
+		PlayerJumper = GetComponent<PlayerJumper>();
+		PlayerCrouching = GetComponent<PlayerCrouching>();
+		PlayerSprinter = GetComponent<PlayerSprinter>();
 	}
 	
 	public void OnMoveByTransformDirection(Vector3 direction)
@@ -92,16 +95,5 @@ public class PlayerViewModel : MonoBehaviour
 	private void OnSprintChanged(bool value)
 	{
 		IsSprintingViewModel.Value = value;
-	}
-	
-	private void InitializePlayer()
-	{
-		PlayerGroundedChecker = new PlayerGroundedChecker();
-		PlayerGravitation = new PlayerGravitation();
-		PlayerMover = new PlayerMover();
-		PlayerLook = new PlayerLook();
-		PlayerJumper = new PlayerJumper();
-		PlayerCrouching = new PlayerCrouching();
-		PlayerSprinter = new PlayerSprinter();
 	}
 }

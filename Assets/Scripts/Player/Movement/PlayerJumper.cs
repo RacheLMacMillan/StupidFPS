@@ -1,19 +1,19 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerViewModel))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerJumper : MonoBehaviour
 {
 	[SerializeField] private float _jumpForce;
 	
 	[SerializeField] private Vector3 _jumpingStartUp;
 	
-	private PlayerViewModel _playerController;
+	private PlayerController _playerController;
 	private CharacterController _characterController;
 
 	public void Awake()
 	{
-		_playerController = GetComponent<PlayerViewModel>();
+		_playerController = GetComponent<PlayerController>();
 		_characterController = GetComponent<CharacterController>();
 	}
 	

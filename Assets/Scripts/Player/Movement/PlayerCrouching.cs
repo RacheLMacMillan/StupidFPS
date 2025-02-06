@@ -12,7 +12,7 @@ public class PlayerCrouching : MonoBehaviour
 	[SerializeField] private Vector3 _standUpCheckPosition;
 	[SerializeField] private float _radiusOfStandUpCheck;
 	
-	private PlayerViewModel _playerController;
+	private PlayerController _playerController;
 	private CharacterController _characterController;
 	private Transform _camera;
 	
@@ -22,7 +22,7 @@ public class PlayerCrouching : MonoBehaviour
 	
 	private void Awake()
 	{
-		_playerController = GetComponent<PlayerViewModel>();
+		_playerController = GetComponent<PlayerController>();
 		_characterController = GetComponent<CharacterController>();
 		_camera = GetComponentInChildren<Camera>().GetComponent<Transform>();
 		
@@ -62,10 +62,10 @@ public class PlayerCrouching : MonoBehaviour
 	
 	private bool CantStandUp()
 	{
-		return Physics.CheckSphere(ScalePostition(), _radiusOfStandUpCheck, _groundLayer);
+		return Physics.CheckSphere(ScalePosition(), _radiusOfStandUpCheck, _groundLayer);
 	}
 	
-	private Vector3 ScalePostition()
+	private Vector3 ScalePosition()
 	{
 		Vector3 playerPosition = transform.localPosition;
 		
@@ -75,6 +75,6 @@ public class PlayerCrouching : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(ScalePostition(), _radiusOfStandUpCheck);
+		Gizmos.DrawWireSphere(ScalePosition(), _radiusOfStandUpCheck);
 	}
 }

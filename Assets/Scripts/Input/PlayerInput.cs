@@ -1,11 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerViewModel))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerInput : MonoBehaviour
 {
 	private InputMap _inputMap;
 	
-	private PlayerViewModel _playerController;
+	private PlayerController _playerController;
 	
 	private void OnEnable() => _inputMap.Enable();
 	private void OnDisabel() => _inputMap.Disable();
@@ -15,7 +15,7 @@ public class PlayerInput : MonoBehaviour
 		_inputMap = new InputMap();
 		InputMap.PlaySceneActions playSceneActions = _inputMap.PlayScene;
 		
-		_playerController = GetComponent<PlayerViewModel>();
+		_playerController = GetComponent<PlayerController>();
 		
 		playSceneActions.Jump.performed += context => _playerController.OnJump();
 		playSceneActions.Crouch.performed += context => _playerController.OnCrouch();

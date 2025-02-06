@@ -12,12 +12,12 @@ public class PlayerMover : MonoBehaviour
 	private float _crouchingSpeed => MoveSpeed * CrouchingSpeedMultiplayer;
 	private float _sprintingSpeed => MoveSpeed * SprintingSpeedMultiplayer;
 	
-	private PlayerViewModel _playerController;
+	private PlayerController _playerController;
 	private CharacterController _characterController;
 
 	private void Awake()
 	{
-		_playerController = GetComponent<PlayerViewModel>();
+		_playerController = GetComponent<PlayerController>();
 		_characterController = GetComponent<CharacterController>();
 	}
 	
