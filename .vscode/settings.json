@@ -57,6 +57,6 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "StupidFPS.sln",
-    "editor.fontSize": 22,
+    "editor.fontSize": 18,
     "editor.lineHeight": 1.25
 }
