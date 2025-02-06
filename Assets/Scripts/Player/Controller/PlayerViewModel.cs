@@ -15,76 +15,68 @@ public class PlayerViewModel : MonoBehaviour
 	
 	public ReactiveProperty<Vector3> PlayerVelocityViewModel = new();
 	
-	private PlayerGroundedChecker _playerGroundedChecker;
-	private PlayerGravitation _playerGravitation;
-	private PlayerMover _playerMover;
-	private PlayerLook _playerLook;
-	private PlayerJumper _playerJumper;
-	private PlayerCrouching _playerCrouching;
-	private PlayerSprinter _playerSprinter;
-	
-	private PlayerStateMachine _playerStateMachine;
+	public PlayerGroundedChecker PlayerGroundedChecker { get; private set; }
+	public PlayerGravitation PlayerGravitation { get; private set; }
+	public PlayerMover PlayerMover { get; private set; }
+	public PlayerLook PlayerLook { get; private set; }
+	public PlayerJumper PlayerJumper { get; private set; }
+	public PlayerCrouching PlayerCrouching { get; private set; }
+	public PlayerSprinter PlayerSprinter { get; private set; }
 
 	private void OnEnable()
 	{
-		_playerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
-		_playerCrouching.IsCrouching.OnChanged += OnCrouchingChanged;
-		_playerSprinter.IsSprinting.OnChanged += OnSprintChanged;
+		PlayerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
+		PlayerCrouching.IsCrouching.OnChanged += OnCrouchingChanged;
+		PlayerSprinter.IsSprinting.OnChanged += OnSprintChanged;
 	}
 	
 	private void OnDisable()
 	{
-		_playerGroundedChecker.IsGrounded.OnChanged -= OnIsGroundedChanged;
-		_playerCrouching.IsCrouching.OnChanged -= OnCrouchingChanged;
-		_playerSprinter.IsSprinting.OnChanged -= OnSprintChanged;
+		PlayerGroundedChecker.IsGrounded.OnChanged -= OnIsGroundedChanged;
+		PlayerCrouching.IsCrouching.OnChanged -= OnCrouchingChanged;
+		PlayerSprinter.IsSprinting.OnChanged -= OnSprintChanged;
 	}
 	
 	private void Awake()
 	{
-		_playerGroundedChecker = GetComponent<PlayerGroundedChecker>();
-		_playerGravitation = GetComponent<PlayerGravitation>();
-		_playerMover = GetComponent<PlayerMover>();
-		_playerLook = GetComponent<PlayerLook>();
-		_playerJumper = GetComponent<PlayerJumper>();
-		_playerCrouching = GetComponent<PlayerCrouching>();
-		_playerSprinter = GetComponent<PlayerSprinter>();
+		InitializePlayer();
 	}
 	
 	private void Update()
 	{
-		_playerGroundedChecker.CheckIsGrounded();
+		PlayerGroundedChecker.CheckIsGrounded();
 		
-		_playerGravitation.GravitatePlayer(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
+		PlayerGravitation.GravitatePlayer(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
 	}
 	
 	public void OnMoveByTransformDirection(Vector3 direction)
 	{
-		_playerMover.MoveByTransformDirection(direction);
+		PlayerMover.MoveByTransformDirection(direction);
 	}
 	
 	public void OnMove(Vector3 direction)
 	{
-		_playerMover.Move(direction);
+		PlayerMover.Move(direction);
 	}
 	
 	public void OnLook(Vector2 direction)
 	{
-		_playerLook.Look(direction);
+		PlayerLook.Look(direction);
 	}
 	
 	public void OnSprint()
 	{
-		_playerSprinter.ChangeIsSprintValue();
+		PlayerSprinter.ChangeIsSprintValue();
 	}
 	
 	public void OnJump()
 	{
-		_playerJumper.Jump(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
+		PlayerJumper.Jump(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
 	}
 	
 	public void OnCrouch()
 	{
-		_playerCrouching.Crouch();
+		PlayerCrouching.Crouch();
 	}
 	
 	private void OnIsGroundedChanged(bool value)
@@ -100,5 +92,16 @@ public class PlayerViewModel : MonoBehaviour
 	private void OnSprintChanged(bool value)
 	{
 		IsSprintingViewModel.Value = value;
+	}
+	
+	private void InitializePlayer()
+	{
+		PlayerGroundedChecker = new PlayerGroundedChecker();
+		PlayerGravitation = new PlayerGravitation();
+		PlayerMover = new PlayerMover();
+		PlayerLook = new PlayerLook();
+		PlayerJumper = new PlayerJumper();
+		PlayerCrouching = new PlayerCrouching();
+		PlayerSprinter = new PlayerSprinter();
 	}
 }
