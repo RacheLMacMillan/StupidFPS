@@ -16,7 +16,7 @@ public class PlayerCrouching : MonoBehaviour
 	private CharacterController _characterController;
 	private Transform _camera;
 	
-	private float _initializedBodySize;
+	private float _initializedBodyHeight;
 	private Vector3 _initializedBodyCenter;
 	private Vector3 _initializedCameraPosition;
 	
@@ -26,41 +26,53 @@ public class PlayerCrouching : MonoBehaviour
 		_characterController = GetComponent<CharacterController>();
 		_camera = GetComponentInChildren<Camera>().GetComponent<Transform>();
 		
-		_initializedBodySize = _characterController.height;
+		_initializedBodyHeight = _characterController.height;
 		_initializedBodyCenter = _characterController.center;
 		_initializedCameraPosition = _camera.transform.localPosition;
 	}
 	
 	public void Crouch()
 	{
-		if (CantStandUp() == true)
+		if (CheckOnCantStandingUp() == true)
 		{
-			throw new ArgumentException("Something is interfering from above.");
+			throw new ArgumentException($"Something is interfering from above of {gameObject.name}.");
 		}
 		if (_player.IsSprintingViewModel.Value == true)
 		{
 			throw new ArgumentException($"{gameObject.name} is sprinting.");
 		}
 		
-		IsCrouching.Value = !IsCrouching.Value;
-		
 		if (IsCrouching.Value == true)
 		{
-			_characterController.height *= _crouchingOffset;
-			_characterController.center = new Vector3(0, _characterController.center.y * _crouchingOffset, 0);
-			
-			_camera.localPosition = new Vector3(0, _camera.position.y * _crouchingOffset, 0);
+			StopCrouching();
 		}
 		else
 		{
-			_characterController.height = _initializedBodySize;
-			_characterController.center = _initializedBodyCenter;
-			
-			_camera.localPosition = _initializedCameraPosition;
+			StartCrouching();
 		}
 	}
 	
-	private bool CantStandUp()
+	public void StartCrouching()
+	{
+		IsCrouching.Value = true;		
+		
+		_characterController.height *= _crouchingOffset;
+		_characterController.center = new Vector3(0, _characterController.center.y * _crouchingOffset, 0);
+		
+		_camera.localPosition = new Vector3(0, _camera.position.y * _crouchingOffset, 0);
+	}
+	
+	public void StopCrouching()
+	{
+		IsCrouching.Value = false;
+		
+		_characterController.height = _initializedBodyHeight;
+		_characterController.center = _initializedBodyCenter;
+		
+		_camera.localPosition = _initializedCameraPosition;
+	}
+	
+	private bool CheckOnCantStandingUp()
 	{
 		return Physics.CheckSphere(ScalePosition(), _radiusOfStandUpCheck, _groundLayer);
 	}
