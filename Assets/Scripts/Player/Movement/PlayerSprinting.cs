@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSprinting : MonoBehaviour
@@ -23,6 +24,23 @@ public class PlayerSprinting : MonoBehaviour
 			throw new ArgumentException($"{gameObject.name} is crouching.");
 		}
 		
-		IsSprinting.Value = !IsSprinting.Value;
+		if (IsSprinting.Value == true)
+		{
+			StopSprinting();
+		}
+		else
+		{
+			StartSprinting();
+		}
+	}
+	
+	public void StartSprinting()
+	{
+		IsSprinting.Value = true;
+	}
+	
+	public void StopSprinting()
+	{
+		IsSprinting.Value = false;
 	}
 }
