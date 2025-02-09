@@ -1,19 +1,19 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(Player))]
 public class PlayerJumper : MonoBehaviour
 {
 	[SerializeField] private float _jumpForce;
 	
 	[SerializeField] private Vector3 _jumpingStartUp;
 	
-	private PlayerController _playerController;
+	private Player _player;
 	private CharacterController _characterController;
 
 	public void Awake()
 	{
-		_playerController = GetComponent<PlayerController>();
+		_player = GetComponent<Player>();
 		_characterController = GetComponent<CharacterController>();
 	}
 	
@@ -28,7 +28,7 @@ public class PlayerJumper : MonoBehaviour
 		
 		playerVelocity.y = Mathf.Sqrt(-_jumpForce * -9.8f);
 		
-		_playerController.PlayerVelocityViewModel.Value = playerVelocity;
+		_player.PlayerVelocityViewModel.Value = playerVelocity;
 		
 		_characterController.Move(playerVelocity * Time.deltaTime);
 	}

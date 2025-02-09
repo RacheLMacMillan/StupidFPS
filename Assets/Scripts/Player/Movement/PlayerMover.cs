@@ -12,12 +12,12 @@ public class PlayerMover : MonoBehaviour
 	private float _crouchingSpeed => MoveSpeed * CrouchingSpeedMultiplayer;
 	private float _sprintingSpeed => MoveSpeed * SprintingSpeedMultiplayer;
 	
-	private PlayerController _playerController;
+	private Player _player;
 	private CharacterController _characterController;
 
 	private void Awake()
 	{
-		_playerController = GetComponent<PlayerController>();
+		_player = GetComponent<Player>();
 		_characterController = GetComponent<CharacterController>();
 	}
 	
@@ -37,11 +37,11 @@ public class PlayerMover : MonoBehaviour
 	{
 		float scaledSpeed;
 		
-		if (_playerController.IsCrouchingViewModel.Value == true)
+		if (_player.IsCrouchingViewModel.Value == true)
 		{
 			scaledSpeed = _crouchingSpeed;
 		}
-		else if (_playerController.IsSprintingViewModel.Value == true)
+		else if (_player.IsSprintingViewModel.Value == true)
 		{
 			scaledSpeed = _sprintingSpeed;
 		}

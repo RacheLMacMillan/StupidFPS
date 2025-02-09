@@ -5,20 +5,20 @@ public class PlayerSprinting : MonoBehaviour
 {
 	public readonly ReactiveProperty<bool> IsSprinting = new();
 	
-	private PlayerController _playerController;
+	private Player _player;
 	
 	private void Awake()
 	{
-		_playerController = GetComponent<PlayerController>();
+		_player = GetComponent<Player>();
 	}
 	
 	public void ChangeIsSprintValue()
 	{
-		if (_playerController.IsGroundedViewModel.Value == false)
+		if (_player.IsGroundedViewModel.Value == false)
 		{
 			throw new ArgumentException($"{gameObject.name} is not on the ground.");
 		}
-		if (_playerController.IsCrouchingViewModel.Value == true)
+		if (_player.IsCrouchingViewModel.Value == true)
 		{
 			throw new ArgumentException($"{gameObject.name} is crouching.");
 		}
