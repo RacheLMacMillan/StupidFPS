@@ -6,9 +6,6 @@ public class PlayerInput : MonoBehaviour
 	
 	private Player _player;
 	
-	private void OnEnable() => _inputMap.Enable();
-	private void OnDisable() => _inputMap.Disable();
-	
 	private void Awake()
 	{
 		_inputMap = new InputMap();
@@ -20,6 +17,9 @@ public class PlayerInput : MonoBehaviour
 		playSceneActions.Crouch.performed += context => _player.OnCrouch();
 		playSceneActions.Sprint.performed += context => _player.OnSprint();
 	}
+	
+	private void OnEnable() => _inputMap.Enable();
+	private void OnDisable() => _inputMap.Disable();
 	
 	private void Update()
 	{
