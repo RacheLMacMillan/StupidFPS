@@ -11,7 +11,6 @@ public class Player : MonoBehaviour, IInitializable
 	
 	public ReactiveProperty<Vector3> PlayerVelocityViewModel = new();
 	
-	public PlayerInput PlayerInput { get; private set; }
 	public PlayerGroundedChecker PlayerGroundedChecker { get; private set; }
 	public PlayerGravitation PlayerGravitation { get; private set; }
 	public PlayerMover PlayerMover { get; private set; }
