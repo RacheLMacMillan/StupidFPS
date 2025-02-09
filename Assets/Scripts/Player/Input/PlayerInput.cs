@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
 public class PlayerInput : MonoBehaviour
 {
 	private InputMap _inputMap;
@@ -10,12 +9,12 @@ public class PlayerInput : MonoBehaviour
 	private void OnEnable() => _inputMap.Enable();
 	private void OnDisable() => _inputMap.Disable();
 	
-	public PlayerInput(Player player)
+	private void Awake()
 	{
-		_player = player;
-		
 		_inputMap = new InputMap();
 		InputMap.PlaySceneActions playSceneActions = _inputMap.PlayScene;
+		
+		_player = GetComponent<Player>();
 		
 		playSceneActions.Jump.performed += context => _player.OnJump();
 		playSceneActions.Crouch.performed += context => _player.OnCrouch();

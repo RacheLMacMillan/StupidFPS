@@ -44,8 +44,6 @@ public class Player : MonoBehaviour, IInitializable
 	
 	public void Initialize()
 	{
-		PlayerInput = new PlayerInput(this);
-		
 		PlayerGroundedChecker = GetComponent<PlayerGroundedChecker>();
 		PlayerGravitation = GetComponent<PlayerGravitation>();
 		PlayerMover = GetComponent<PlayerMover>();
