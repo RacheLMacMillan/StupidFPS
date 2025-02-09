@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class FsmStateWalk : FsmState
+public class PlayerStateWalk : FiniteStateMachineState
 {
-	public FsmStateWalk(Fsm fsm) : base(fsm) {  }
+	public PlayerStateWalk(FiniteStateMachine fsm) : base(fsm) {  }
 
 	public override void Enter()
 	{

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class FsmStateIdle : FsmState
+public class PlayerStateIdle : FiniteStateMachineState
 {
-	public FsmStateIdle(Fsm fsm) : base(fsm) {  }
+	public PlayerStateIdle(FiniteStateMachine fsm) : base(fsm) {  }
 
 	public override void Enter()
 	{
@@ -20,7 +20,7 @@ public class FsmStateIdle : FsmState
 		
 		if (1 == 1)
 		{
-			Fsm.SetState<FsmStateWalk>();
+			Fsm.SetState<PlayerStateWalk>();
 		}
 	}
 }

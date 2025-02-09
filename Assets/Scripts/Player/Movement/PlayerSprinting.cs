@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerSprinter : MonoBehaviour
+public class PlayerSprinting : MonoBehaviour
 {
 	public readonly ReactiveProperty<bool> IsSprinting = new();
 	

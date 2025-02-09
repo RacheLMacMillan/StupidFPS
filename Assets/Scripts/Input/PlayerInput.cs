@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour
 	private PlayerController _playerController;
 	
 	private void OnEnable() => _inputMap.Enable();
-	private void OnDisabel() => _inputMap.Disable();
+	private void OnDisable() => _inputMap.Disable();
 	
 	private void Awake()
 	{
@@ -24,9 +24,9 @@ public class PlayerInput : MonoBehaviour
 	
 	private void Update()
 	{
-		Vector3 correctMoveDirection = CorrectMoveDirection(_inputMap.PlayScene.Move.ReadValue<Vector2>());
+		Vector3 correctedMoveDirection = CorrectMoveDirection(_inputMap.PlayScene.Move.ReadValue<Vector2>());
 		
-		_playerController.OnMoveByTransformDirection(correctMoveDirection);
+		_playerController.OnMoveByTransformDirection(correctedMoveDirection);
 		_playerController.OnLook(_inputMap.PlayScene.Look.ReadValue<Vector2>());	
 	}
 	

@@ -17,21 +17,21 @@ public class PlayerController : MonoBehaviour, IInitializable
 	public PlayerLook PlayerLook { get; private set; }
 	public PlayerJumper PlayerJumper { get; private set; }
 	public PlayerCrouching PlayerCrouching { get; private set; }
-	public PlayerSprinter PlayerSprinter { get; private set; }
+	public PlayerSprinting PlayerSprinting { get; private set; }
 	public CharacterController CharacterController { get; private set; }
 
 	private void OnEnable()
 	{
 		PlayerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
 		PlayerCrouching.IsCrouching.OnChanged += OnCrouchingChanged;
-		PlayerSprinter.IsSprinting.OnChanged += OnSprintChanged;
+		PlayerSprinting.IsSprinting.OnChanged += OnSprintChanged;
 	}
 	
 	private void OnDisable()
 	{
 		PlayerGroundedChecker.IsGrounded.OnChanged -= OnIsGroundedChanged;
 		PlayerCrouching.IsCrouching.OnChanged -= OnCrouchingChanged;
-		PlayerSprinter.IsSprinting.OnChanged -= OnSprintChanged;
+		PlayerSprinting.IsSprinting.OnChanged -= OnSprintChanged;
 	}
 	
 	private void Update()
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour, IInitializable
 		PlayerLook = GetComponent<PlayerLook>();
 		PlayerJumper = GetComponent<PlayerJumper>();
 		PlayerCrouching = GetComponent<PlayerCrouching>();
-		PlayerSprinter = GetComponent<PlayerSprinter>();
+		PlayerSprinting = GetComponent<PlayerSprinting>();
 	}
 	
 	public void OnMoveByTransformDirection(Vector3 direction)
@@ -67,11 +67,6 @@ public class PlayerController : MonoBehaviour, IInitializable
 		PlayerLook.Look(direction);
 	}
 	
-	public void OnSprint()
-	{
-		PlayerSprinter.ChangeIsSprintValue();
-	}
-	
 	public void OnJump()
 	{
 		PlayerJumper.Jump(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
@@ -80,6 +75,11 @@ public class PlayerController : MonoBehaviour, IInitializable
 	public void OnCrouch()
 	{
 		PlayerCrouching.Crouch();
+	}
+	
+	public void OnSprint()
+	{
+		PlayerSprinting.ChangeIsSprintValue();
 	}
 	
 	private void OnIsGroundedChanged(bool value)

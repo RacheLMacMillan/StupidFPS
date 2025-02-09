@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
-public class Fsm 
+public class FiniteStateMachine 
 {
-	private FsmState CurrentState { get; set; }
+	private FiniteStateMachineState CurrentState { get; set; }
 	
-	private Dictionary<Type, FsmState> _states = new Dictionary<Type, FsmState>();
+	private Dictionary<Type, FiniteStateMachineState> _states = new Dictionary<Type, FiniteStateMachineState>();
 	
-	public void AddState(FsmState state)
+	public void AddState(FiniteStateMachineState state)
 	{
 		_states.Add(state.GetType(), state);
 	}
 	
-	public void SetState<T>() where T : FsmState
+	public void SetState<T>() where T : FiniteStateMachineState
 	{
 		var type = typeof(T);
 
