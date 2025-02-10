@@ -52,6 +52,18 @@ public class Player : MonoBehaviour, IInitializable
 		PlayerSprinting = GetComponent<PlayerSprinting>();
 	}
 	
+	public void OnCrouchingStateEnabled()
+	{
+		PlayerSprinting.StopSprinting();
+		PlayerCrouching.StartCrouching();
+	}
+	
+	public void OnSprintingStateEnabled()
+	{
+		PlayerCrouching.StopCrouching();
+		PlayerSprinting.StartSprinting();
+	}
+	
 	public void OnMoveByTransformDirection(Vector3 direction)
 	{
 		PlayerMover.MoveByTransformDirection(direction);
