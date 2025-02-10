@@ -1,10 +1,10 @@
 public abstract class FiniteStateMachineState
 {
-	protected readonly FiniteStateMachine Fsm;
+	protected readonly FiniteStateMachine FSM;
 	
 	public FiniteStateMachineState(FiniteStateMachine fsm)
 	{
-		Fsm = fsm;
+		FSM = fsm;
 	}
 	
 	public virtual void Enter() {  }

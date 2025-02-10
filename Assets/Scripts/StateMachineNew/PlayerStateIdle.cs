@@ -20,7 +20,7 @@ public class PlayerStateIdle : FiniteStateMachineState
 		
 		if (1 == 1)
 		{
-			Fsm.SetState<PlayerStateWalk>();
+			FSM.SetState<PlayerStateWalk>();
 		}
 	}
 }
