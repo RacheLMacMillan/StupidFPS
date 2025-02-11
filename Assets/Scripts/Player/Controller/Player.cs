@@ -12,6 +12,8 @@ public class Player : MonoBehaviour, IInitializable
 	public ReactiveProperty<Vector3> PlayerVelocityViewModel = new();
 	
 	public PlayerGroundedChecker PlayerGroundedChecker { get; private set; }
+	public PlayerAbleToStandUpChecker PlayerAbleToStandUpChecker { get; private set; }
+	
 	public PlayerGravitation PlayerGravitation { get; private set; }
 	public PlayerMover PlayerMover { get; private set; }
 	public PlayerLook PlayerLook { get; private set; }
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour, IInitializable
 	private void Update()
 	{
 		PlayerGroundedChecker.CheckIsGrounded();
+		PlayerAbleToStandUpChecker.CheckAbleToStandUp();
 		
 		PlayerGravitation.GravitatePlayer(PlayerVelocityViewModel.Value, IsGroundedViewModel.Value);
 	}
@@ -44,6 +47,8 @@ public class Player : MonoBehaviour, IInitializable
 	public void Initialize()
 	{
 		PlayerGroundedChecker = GetComponent<PlayerGroundedChecker>();
+		PlayerAbleToStandUpChecker = GetComponent<PlayerAbleToStandUpChecker>();
+		
 		PlayerGravitation = GetComponent<PlayerGravitation>();
 		PlayerMover = GetComponent<PlayerMover>();
 		PlayerLook = GetComponent<PlayerLook>();
@@ -87,11 +92,15 @@ public class Player : MonoBehaviour, IInitializable
 	public void OnCrouch()
 	{
 		PlayerCrouching.Crouch();
+		
+		PlayerSprinting.StopSprinting();
 	}
 	
 	public void OnSprint()
 	{
 		PlayerSprinting.ChangeIsSprintValue();
+		
+		PlayerCrouching.StopCrouching();
 	}
 	
 	private void OnIsGroundedChanged(bool value)

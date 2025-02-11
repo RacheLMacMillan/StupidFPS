@@ -21,7 +21,7 @@ public class PlayerJumper : MonoBehaviour
 	{
 		if (isGrounded == false)
 		{
-			throw new ArgumentException();
+			throw new ArgumentException("Player must be on the ground before jumping.");
 		}
 		
 		transform.position += _jumpingStartUp;

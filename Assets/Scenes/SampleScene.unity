@@ -6100,12 +6100,13 @@ GameObject:
   - component: {fileID: 1317052767}
   - component: {fileID: 1317052773}
   - component: {fileID: 1317052770}
-  - component: {fileID: 1317052772}
   - component: {fileID: 1317052760}
   - component: {fileID: 1317052761}
   - component: {fileID: 1317052765}
   - component: {fileID: 1317052766}
   - component: {fileID: 1317052771}
+  - component: {fileID: 1317052772}
+  - component: {fileID: 1317052775}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6213,11 +6214,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _crouchingOffset: 0.5
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  _standUpCheckPosition: {x: 0, y: 1.51, z: 0}
-  _radiusOfStandUpCheck: 0.5
 --- !u!114 &1317052767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6271,6 +6267,7 @@ MonoBehaviour:
   _toStandLayer:
     serializedVersion: 2
     m_Bits: 2048
+  _positionOfCheck: {x: 0, y: 0.49, z: 0}
   _radiusOfCheck: 0.5
 --- !u!114 &1317052773
 MonoBehaviour:
@@ -6284,6 +6281,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c0e62066c536f48bd1e2637cbbec38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1317052775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317052757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b32b83e758d90c46b307f3c93bc7fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  _standUpCheckPosition: {x: 0, y: 1.51, z: 0}
+  _radiusOfStandUpCheck: 0.5
 --- !u!1 &1638891572
 GameObject:
   m_ObjectHideFlags: 0

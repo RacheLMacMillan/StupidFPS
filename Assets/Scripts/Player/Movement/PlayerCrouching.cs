@@ -7,10 +7,6 @@ public class PlayerCrouching : MonoBehaviour
 	public readonly ReactiveProperty<bool> IsCrouching = new();
 	
 	[SerializeField, Range(0, 1)] private float _crouchingOffset;
-	[SerializeField] private LayerMask _groundLayer;
-	
-	[SerializeField] private Vector3 _standUpCheckPosition;
-	[SerializeField] private float _radiusOfStandUpCheck;
 	
 	private Player _player;
 	private CharacterController _characterController;
@@ -33,13 +29,9 @@ public class PlayerCrouching : MonoBehaviour
 	
 	public void Crouch()
 	{
-		if (CheckOnCantStandingUp() == true)
+		if (false == true)
 		{
 			throw new ArgumentException($"Something is interfering from above of {gameObject.name}.");
-		}
-		if (_player.IsSprintingViewModel.Value == true)
-		{
-			throw new ArgumentException($"{gameObject.name} is sprinting.");
 		}
 		
 		if (IsCrouching.Value == true)
@@ -70,23 +62,5 @@ public class PlayerCrouching : MonoBehaviour
 		_characterController.center = _initializedBodyCenter;
 		
 		_camera.localPosition = _initializedCameraPosition;
-	}
-	
-	private bool CheckOnCantStandingUp()
-	{
-		return Physics.CheckSphere(ScalePosition(), _radiusOfStandUpCheck, _groundLayer);
-	}
-	
-	private Vector3 ScalePosition()
-	{
-		Vector3 playerPosition = transform.localPosition;
-		
-		return new Vector3(playerPosition.x, playerPosition.y + _standUpCheckPosition.y, playerPosition.z);
-	}
-	
-	private void OnDrawGizmos()
-	{
-		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(ScalePosition(), _radiusOfStandUpCheck);
 	}
 }

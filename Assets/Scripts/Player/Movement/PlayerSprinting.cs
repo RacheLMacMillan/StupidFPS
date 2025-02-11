@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSprinting : MonoBehaviour
@@ -18,10 +17,6 @@ public class PlayerSprinting : MonoBehaviour
 		if (_player.IsGroundedViewModel.Value == false)
 		{
 			throw new ArgumentException($"{gameObject.name} is not on the ground.");
-		}
-		if (_player.IsCrouchingViewModel.Value == true)
-		{
-			throw new ArgumentException($"{gameObject.name} is crouching.");
 		}
 		
 		if (IsSprinting.Value == true)
