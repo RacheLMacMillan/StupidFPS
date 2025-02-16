@@ -8,9 +8,7 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
 	
 	protected BaseState<EState> CurrentState;
 	
-	private void Awake()
-	{
-	}
+	protected bool IsTransitioningState = false;
 	
 	private void Start()
 	{
@@ -21,11 +19,11 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
 	{
 		EState nextStateKey = CurrentState.GetNextState();
 		
-		if (nextStateKey.Equals(CurrentState.StateKey))
+		if (!IsTransitioningState && nextStateKey.Equals(CurrentState.StateKey))
 		{
 			CurrentState.UpdateState();
 		}
-		else
+		else if (!IsTransitioningState)
 		{
 			TransitionToState(nextStateKey);
 		}
@@ -33,10 +31,12 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
 
 	private void TransitionToState(EState stateKey)
 	{
-		
+		IsTransitioningState = true;
 		
 		CurrentState.ExitState();
 		CurrentState = States[stateKey];
 		CurrentState.EnterState();
+		
+		IsTransitioningState = false;
 	}
 }
