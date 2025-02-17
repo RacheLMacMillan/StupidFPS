@@ -4,8 +4,12 @@ public class PlayerStateMachine : BaseStateMachine<EPlayerState>
 {
 	[SerializeField] private Player _player;
 	
-	public PlayerStateMachine(Player player) 
+	private PlayerStateContext _context;
+	
+	private void Awake() 
 	{
-		_player = player;
+		_player = GetComponent<Player>();
+		
+		_context = new PlayerStateContext(_player);
 	}
 }
