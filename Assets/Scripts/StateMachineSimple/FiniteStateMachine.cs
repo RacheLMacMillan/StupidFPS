@@ -1,38 +1,41 @@
 using System;
 using System.Collections.Generic;
 
-public class FiniteStateMachine 
+namespace FSM
 {
-	private FiniteStateMachineState CurrentState { get; set; }
-	
-	private Dictionary<Type, FiniteStateMachineState> _states = new Dictionary<Type, FiniteStateMachineState>();
-	
-	public void AddState(FiniteStateMachineState state)
+	public class FiniteStateMachine 
 	{
-		_states.Add(state.GetType(), state);
-	}
-	
-	public void SetState<T>() where T : FiniteStateMachineState
-	{
-		var type = typeof(T);
-
-		if (CurrentState.GetType() == type)
+		private FiniteStateMachineState CurrentState { get; set; }
+		
+		private Dictionary<Type, FiniteStateMachineState> _states = new Dictionary<Type, FiniteStateMachineState>();
+		
+		public void AddState(FiniteStateMachineState state)
 		{
-			return;
+			_states.Add(state.GetType(), state);
 		}
 		
-		if (_states.TryGetValue(type, out var newState))
+		public void SetState<T>() where T : FiniteStateMachineState
 		{
-			CurrentState?.Exit();
+			var type = typeof(T);
+
+			if (CurrentState.GetType() == type)
+			{
+				return;
+			}
 			
-			CurrentState = newState;
-			
-			CurrentState.Enter();
+			if (_states.TryGetValue(type, out var newState))
+			{
+				CurrentState?.Exit();
+				
+				CurrentState = newState;
+				
+				CurrentState.Enter();
+			}
 		}
-	}
-	
-	public void Update()
-	{
-		CurrentState?.Update();
+		
+		public void Update()
+		{
+			CurrentState?.Update();
+		}
 	}
 }

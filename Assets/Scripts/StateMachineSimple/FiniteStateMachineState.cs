@@ -1,14 +1,17 @@
-public abstract class FiniteStateMachineState
+namespace FSM
 {
-	protected readonly FiniteStateMachine FSM;
-	
-	public FiniteStateMachineState(FiniteStateMachine fsm)
+	public abstract class FiniteStateMachineState
 	{
-		FSM = fsm;
+		protected readonly FiniteStateMachine FSM;
+		
+		public FiniteStateMachineState(FiniteStateMachine fsm)
+		{
+			FSM = fsm;
+		}
+		
+		public virtual void Enter() {  }
+		public virtual void Exit() {  }
+		public virtual void Update() {  }
+		
 	}
-	
-	public virtual void Enter() {  }
-	public virtual void Exit() {  }
-	public virtual void Update() {  }
-	
 }
