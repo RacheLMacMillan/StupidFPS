@@ -4,6 +4,8 @@ public class Player : MonoBehaviour, IInitializable
 {
 	public ReactiveProperty<float> GravityValueViewModel = new();
 	public ReactiveProperty<float> MoveSpeedViewModel = new();
+	public ReactiveProperty<Vector3> MoveDirection = new();
+	public ReactiveProperty<Vector3> LookDirection = new();
 	
 	public ReactiveProperty<bool> IsGroundedViewModel = new();
 	public ReactiveProperty<bool> IsCrouchingViewModel = new();
@@ -20,7 +22,6 @@ public class Player : MonoBehaviour, IInitializable
 	public PlayerJumper PlayerJumper { get; private set; }
 	public PlayerCrouching PlayerCrouching { get; private set; }
 	public PlayerSprinting PlayerSprinting { get; private set; }
-	public CharacterController CharacterController { get; private set; }
 
 	private void OnEnable()
 	{
@@ -76,11 +77,15 @@ public class Player : MonoBehaviour, IInitializable
 	
 	public void OnMove(Vector3 direction)
 	{
+		MoveDirection.Value = direction;
+		
 		PlayerMover.Move(direction);
 	}
 	
 	public void OnLook(Vector2 direction)
 	{
+		LookDirection.Value = direction;
+		
 		PlayerLook.Look(direction);
 	}
 	
