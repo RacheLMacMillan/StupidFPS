@@ -29,14 +29,9 @@ public class PlayerCrouching : MonoBehaviour
 	
 	public void Crouch()
 	{
-		if (false == true)
-		{
-			throw new ArgumentException($"Something is interfering from above of {gameObject.name}.");
-		}
-		
 		if (IsCrouching.Value == true)
 		{
-			StopCrouching();
+			StandUp();
 		}
 		else
 		{
@@ -54,13 +49,27 @@ public class PlayerCrouching : MonoBehaviour
 		_camera.localPosition = new Vector3(0, _camera.position.y * _crouchingOffset, 0);
 	}
 	
-	public void StopCrouching()
+	public void StandUp()
 	{
+		CheckAvailableToStandUp();
+		
 		IsCrouching.Value = false;
 		
 		_characterController.height = _initializedBodyHeight;
 		_characterController.center = _initializedBodyCenter;
 		
 		_camera.localPosition = _initializedCameraPosition;
+	}
+	
+	private bool CheckAvailableToStandUp()
+	{
+		if (_player.IsAbleToStandUpViewModel.Value == false)
+		{
+			throw new ArgumentException($"Something is interfering from above of {gameObject.name}.");
+		}
+		else
+		{
+			return true;
+		}
 	}
 }

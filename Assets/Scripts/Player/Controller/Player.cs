@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, IInitializable
 	public ReactiveProperty<bool> IsGroundedViewModel = new();
 	public ReactiveProperty<bool> IsCrouchingViewModel = new();
 	public ReactiveProperty<bool> IsSprintingViewModel = new();
+	public ReactiveProperty<bool> IsAbleToStandUpViewModel = new();
 	
 	public ReactiveProperty<Vector3> PlayerVelocityViewModel = new();
 	
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour, IInitializable
 		PlayerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
 		PlayerCrouching.IsCrouching.OnChanged += OnCrouchingChanged;
 		PlayerSprinting.IsSprinting.OnChanged += OnSprintChanged;
+		PlayerAbleToStandUpChecker.IsAbleToStandUp.OnChanged += OnAbleToStandUpChanged;
 	}
 	
 	private void OnDisable()
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour, IInitializable
 		PlayerGroundedChecker.IsGrounded.OnChanged -= OnIsGroundedChanged;
 		PlayerCrouching.IsCrouching.OnChanged -= OnCrouchingChanged;
 		PlayerSprinting.IsSprinting.OnChanged -= OnSprintChanged;
+		PlayerAbleToStandUpChecker.IsAbleToStandUp.OnChanged -= OnAbleToStandUpChanged;
 	}
 	
 	private void Update()
@@ -66,7 +69,7 @@ public class Player : MonoBehaviour, IInitializable
 	
 	public void OnSprintingStateEnabled()
 	{
-		PlayerCrouching.StopCrouching();
+		PlayerCrouching.StandUp();
 		PlayerSprinting.StartSprinting();
 	}
 	
@@ -105,7 +108,7 @@ public class Player : MonoBehaviour, IInitializable
 	{
 		PlayerSprinting.ChangeIsSprintValue();
 		
-		PlayerCrouching.StopCrouching();
+		PlayerCrouching.StandUp();
 	}
 	
 	private void OnIsGroundedChanged(bool value)
@@ -121,5 +124,12 @@ public class Player : MonoBehaviour, IInitializable
 	private void OnSprintChanged(bool value)
 	{
 		IsSprintingViewModel.Value = value;
+	}
+	
+	private void OnAbleToStandUpChanged(bool value)
+	{
+		IsAbleToStandUpViewModel.Value = value;
+		
+		Debug.Log("View Model " + IsAbleToStandUpViewModel.Value);
 	}
 }
