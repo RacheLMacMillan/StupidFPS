@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IInitializable
@@ -129,7 +130,5 @@ public class Player : MonoBehaviour, IInitializable
 	private void OnAbleToStandUpChanged(bool value)
 	{
 		IsAbleToStandUpViewModel.Value = value;
-		
-		Debug.Log("View Model " + IsAbleToStandUpViewModel.Value);
 	}
 }

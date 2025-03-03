@@ -8,9 +8,12 @@ public class PlayerCrouching : MonoBehaviour
 	
 	[SerializeField, Range(0, 1)] private float _crouchingOffset;
 	
+	[SerializeField] private AnimationCurve animationCurve;
+	
 	private Player _player;
 	private CharacterController _characterController;
 	private Transform _camera;
+	
 	
 	private float _initializedBodyHeight;
 	private Vector3 _initializedBodyCenter;
