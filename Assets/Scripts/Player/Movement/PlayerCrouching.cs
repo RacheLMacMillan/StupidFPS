@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -8,6 +9,7 @@ public class PlayerCrouching : MonoBehaviour
 	
 	[SerializeField, Range(0, 1)] private float _crouchingOffset;
 	
+	[SerializeField] private float _crouchingAnimationTime;
 	[SerializeField] private AnimationCurve animationCurve;
 	
 	private Player _player;
@@ -44,12 +46,27 @@ public class PlayerCrouching : MonoBehaviour
 	
 	public void StartCrouching()
 	{
-		IsCrouching.Value = true;		
+		if (IsCrouching.Value == true)
+		{
+		    throw new ArgumentOutOfRangeException($"{gameObject.name} is already crouching");
+		}
+	
+		IsCrouching.Value = true;
 		
 		_characterController.height *= _crouchingOffset;
-		_characterController.center = new Vector3(0, _characterController.center.y * _crouchingOffset, 0);
-		
-		_camera.localPosition = new Vector3(0, _camera.position.y * _crouchingOffset, 0);
+		_characterController.center = new Vector3
+		(
+			_characterController.center.x,
+			_characterController.center.y * _crouchingOffset,
+			_characterController.center.z
+		);
+			
+		_camera.localPosition = new Vector3
+		(
+			_camera.localPosition.x,
+			_camera.localPosition.y * _crouchingOffset,
+			_camera.localPosition.z
+		);
 	}
 	
 	public void StandUp()
