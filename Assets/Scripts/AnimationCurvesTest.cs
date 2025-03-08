@@ -1,26 +1,24 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimationCurvesTest : MonoBehaviour
 {
-    [SerializeField] private AnimationCurve _curve;
-    [SerializeField] private float _time;
-    [SerializeField] private float _duration;
-    [SerializeField] private float _multipl;
+    [SerializeField] private AnimationCurve _yAnimation;
+    [SerializeField] private float _height;
+    
+    private float _expiredTime;
+    private float _duration = 1;
 
-    void FixedUpdate()
+    private void Update()
     {
-        _time += Time.deltaTime;
+        _expiredTime += Time.deltaTime;
         
-        if (_time > _duration)
+        if (_expiredTime > _duration)
         {
-            _time = 0;
+            _expiredTime = 0;
         }
         
-        float progress = _time / _duration;
+        float progress = _expiredTime / _duration;
         
-        Vector3 f = transform.position;
-        
-        transform.position = new Vector3(f.x, f.y + _curve.Evaluate(progress) * _multipl, f.z);
+        transform.position = new Vector3(0, _yAnimation.Evaluate(progress) * _height, 0);
     }
 }
