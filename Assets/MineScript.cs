@@ -6,30 +6,37 @@ public class MineScript : MonoBehaviour
 {
     [SerializeField] private float _damage;
     [SerializeField] private float _secondsForWaiting;
+    
+    private IDamageable _damageable;
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamageable damageable = other.GetComponent<IDamageable>();
+        _damageable = other.GetComponent<IDamageable>();
         
-        if (damageable == null)
+        if (_damageable == null)
         {
             throw new NullReferenceException();
         }
         
-        StartCoroutine(ActivateMine(damageable));
+        StartCoroutine(ActivateMine());
     }
-    
-    private IEnumerator ActivateMine(IDamageable damageable)
+
+    private void OnTriggerExit(Collider other)
+    {
+        _damageable = null;
+    }
+
+    private IEnumerator ActivateMine()
     {
         transform.position = new Vector3
         (
-            0, 
-            Mathf.Lerp(0f, 1f, _secondsForWaiting * Time.deltaTime), 
-            0
+            transform.position.x, 
+            transform.position.y + 1f, 
+            transform.position.z
         );
         
         yield return new WaitForSeconds(_secondsForWaiting);
         
-        damageable.TakeDamage(_damage);
+        _damageable.TakeDamage(_damage);
     }
 }
