@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class MineScpit : MonoBehaviour
+public class MineScript : MonoBehaviour
 {
-    [SerializeField] private float _damge;
+    [SerializeField] private float _damage;
     [SerializeField] private float _secondsForWaiting;
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         IDamageable damageable = other.GetComponent<IDamageable>();
         
@@ -30,6 +30,6 @@ public class MineScpit : MonoBehaviour
         
         yield return new WaitForSeconds(_secondsForWaiting);
         
-        damageable.TakeDamage(_damge);
+        damageable.TakeDamage(_damage);
     }
 }
