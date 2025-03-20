@@ -7,6 +7,8 @@ public class MineScript : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private float _secondsForWaiting;
     
+    [SerializeField] private AnimationCurve _explodeAnimation;
+    
     private IDamageable _damageable;
 
     private void OnTriggerEnter(Collider other)
@@ -37,6 +39,8 @@ public class MineScript : MonoBehaviour
         
         yield return new WaitForSeconds(_secondsForWaiting);
         
-        _damageable.TakeDamage(_damage);
+        _damageable?.TakeDamage(_damage);
+        
+        Destroy(gameObject);
     }
 }
