@@ -19,6 +19,6 @@ public class AnimationCurvesTest : MonoBehaviour
         
         float progress = _expiredTime / _duration;
         
-        transform.position = new Vector3(0, _yAnimation.Evaluate(progress) * _height, 0);
+        transform.position = new Vector3(transform.position.x, _yAnimation.Evaluate(progress) * _height, transform.position.z);
     }
 }
