@@ -5738,6 +5738,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 150
   _secondsForWaiting: 1
+  _explodeAnimation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!135 &461919765
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6558,32 +6564,32 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 3.0371902
-      outSlope: 3.0371902
+      inSlope: 3.029911
+      outSlope: 3.029911
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.06666666
+      inWeight: 0
+      outWeight: 0.15368658
     - serializedVersion: 3
-      time: 0.5
+      time: 0.3912789
+      value: 0.84117156
+      inSlope: 0.6766799
+      outSlope: 0.6766799
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.38056764
+      outWeight: 0.09313425
+    - serializedVersion: 3
+      time: 1.0023193
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0.0012435913
-      inSlope: -3.3617368
-      outSlope: -3.3617368
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.22592747
-      outWeight: 0.33333334
-    m_PreInfinity: 0
-    m_PostInfinity: 0
+      inWeight: 0.2041967
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
     m_RotationOrder: 4
   _height: 1
 --- !u!65 &576531007
@@ -8871,6 +8877,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 50
   _secondsForWaiting: 1
+  _explodeAnimation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!135 &1207657002
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9738,6 +9750,7 @@ GameObject:
   - component: {fileID: 1317052775}
   - component: {fileID: 1317052776}
   - component: {fileID: 1317052777}
+  - component: {fileID: 1317052778}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9980,6 +9993,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
+--- !u!114 &1317052778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317052757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5eec8ab2bfbf74fb115f873e33f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.029911
+      outSlope: 3.029911
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.15368658
+    - serializedVersion: 3
+      time: 0.3912789
+      value: 0.84117156
+      inSlope: 0.6766799
+      outSlope: 0.6766799
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.38056764
+      outWeight: 0.09313425
+    - serializedVersion: 3
+      time: 1.0023193
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2041967
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _height: 1
 --- !u!1 &1638891572
 GameObject:
   m_ObjectHideFlags: 0
