@@ -1,6 +1,17 @@
-using System;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerGroundedChecker))]
+[RequireComponent(typeof(PlayerAbleToStandUpChecker))]
+
+[RequireComponent(typeof(PlayerGravitation))]
+[RequireComponent(typeof(PlayerMover))]
+[RequireComponent(typeof(PlayerLook))]
+[RequireComponent(typeof(PlayerJumper))]
+[RequireComponent(typeof(PlayerCrouching))]
+[RequireComponent(typeof(PlayerSprinting))]
+[RequireComponent(typeof(PlayerDasher))]
+
+[RequireComponent(typeof(PlayerHealth))]
 public class Player : MonoBehaviour, IInitializable
 {
 	public ReactiveProperty<float> GravityValueViewModel = new();
@@ -24,6 +35,7 @@ public class Player : MonoBehaviour, IInitializable
 	public PlayerJumper PlayerJumper { get; private set; }
 	public PlayerCrouching PlayerCrouching { get; private set; }
 	public PlayerSprinting PlayerSprinting { get; private set; }
+	public PlayerDasher PlayerDasher { get; private set; }
 
 	private void OnEnable()
 	{
@@ -60,6 +72,7 @@ public class Player : MonoBehaviour, IInitializable
 		PlayerJumper = GetComponent<PlayerJumper>();
 		PlayerCrouching = GetComponent<PlayerCrouching>();
 		PlayerSprinting = GetComponent<PlayerSprinting>();
+		PlayerDasher = GetComponent<PlayerDasher>();
 	}
 	
 	public void OnCrouchingStateEnabled()
@@ -110,6 +123,11 @@ public class Player : MonoBehaviour, IInitializable
 		PlayerSprinting.ChangeIsSprintValue();
 		
 		PlayerCrouching.StandUp();
+	}
+	
+	public void OnDash(Vector2 direction)
+	{
+	    PlayerDasher.Dash(direction);
 	}
 	
 	private void OnIsGroundedChanged(bool value)

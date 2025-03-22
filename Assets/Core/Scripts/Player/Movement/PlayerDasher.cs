@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerDasher : MonoBehaviour
 {
+    public readonly ReactiveProperty<bool> IsDashing = new();
+
     [SerializeField] private AnimationCurve _dashCurve;
 
     [SerializeField] private float _height;
@@ -9,16 +11,14 @@ public class PlayerDasher : MonoBehaviour
     private float _expiredTime;
     private float _duration = 1;
     
-    private bool isDashing = false;
-    
-    private void Update()
+    public void Dash(Vector2 direction)
     {
         if (Input.GetKey(KeyCode.V))
         {
-            isDashing = true;
+            IsDashing.Value = true;
         }
     
-        if (isDashing)
+        if (IsDashing.Value)
         {
             _expiredTime += Time.deltaTime;
         
@@ -26,7 +26,7 @@ public class PlayerDasher : MonoBehaviour
             {
                 _expiredTime = 0;
                 
-                isDashing = false;
+                IsDashing.Value = false;
             }
             
             float progress = _expiredTime / _duration;
@@ -34,6 +34,6 @@ public class PlayerDasher : MonoBehaviour
             transform.position += new Vector3(_dashCurve.Evaluate(progress) * _height, 1, 0);
         }
         
-        Debug.Log(isDashing);
+        Debug.Log(IsDashing.Value);
     }
 }

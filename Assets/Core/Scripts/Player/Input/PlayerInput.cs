@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Player))]
 public class PlayerInput : MonoBehaviour
 {
 	private InputMap _inputMap;
@@ -16,6 +17,7 @@ public class PlayerInput : MonoBehaviour
 		playSceneActions.Jump.performed += context => _player.OnJump();
 		playSceneActions.Crouch.performed += context => _player.OnCrouch();
 		playSceneActions.Sprint.performed += context => _player.OnSprint();
+		playSceneActions.Dash.performed += context => _player.OnDash(playSceneActions.Move.ReadValue<Vector2>());
 	}
 	
 	private void OnEnable() => _inputMap.Enable();
@@ -23,7 +25,9 @@ public class PlayerInput : MonoBehaviour
 	
 	private void Update()
 	{
-		Vector3 correctedMoveDirection = CorrectMoveDirection(_inputMap.PlayScene.Move.ReadValue<Vector2>());
+		Vector2 moveDirection = _inputMap.PlayScene.Move.ReadValue<Vector2>();
+		Vector3 correctedMoveDirection = new Vector3(moveDirection.x, 0, moveDirection.y);
+		
 		Vector2 lookDirection = _inputMap.PlayScene.Look.ReadValue<Vector2>();
 		
 		if (correctedMoveDirection != Vector3.zero)
@@ -35,17 +39,5 @@ public class PlayerInput : MonoBehaviour
 		{
 			_player.OnLook(lookDirection);
 		}
-	}
-	
-	private Vector3 CorrectMoveDirection(Vector2 direction)
-	{
-		Vector3 correctedDirection = new Vector3
-		(
-			direction.x,
-			0,
-			direction.y
-		);
-		
-		return correctedDirection;
 	}
 }
