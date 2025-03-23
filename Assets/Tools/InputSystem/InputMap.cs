@@ -214,6 +214,34 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""8f6e542e-4c99-4d22-b121-2007075b68f6"",
+            ""actions"": [
+                {
+                    ""name"": ""Lock Cursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a65fac4-e1d0-4677-b17c-1b81cbe2525a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press,Hold"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""65872664-b474-4873-aa26-b446fe55d558"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock Cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -244,11 +272,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_PlayScene_Crouch = m_PlayScene.FindAction("Crouch", throwIfNotFound: true);
         m_PlayScene_Dash = m_PlayScene.FindAction("Dash", throwIfNotFound: true);
         m_PlayScene_Shoot = m_PlayScene.FindAction("Shoot", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_LockCursor = m_Debug.FindAction("Lock Cursor", throwIfNotFound: true);
     }
 
     ~@InputMap()
     {
         UnityEngine.Debug.Assert(!m_PlayScene.enabled, "This will cause a leak and performance issues, InputMap.PlayScene.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Debug.enabled, "This will cause a leak and performance issues, InputMap.Debug.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -400,6 +432,52 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         }
     }
     public PlaySceneActions @PlayScene => new PlaySceneActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+    private readonly InputAction m_Debug_LockCursor;
+    public struct DebugActions
+    {
+        private @InputMap m_Wrapper;
+        public DebugActions(@InputMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LockCursor => m_Wrapper.m_Debug_LockCursor;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void AddCallbacks(IDebugActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+            @LockCursor.started += instance.OnLockCursor;
+            @LockCursor.performed += instance.OnLockCursor;
+            @LockCursor.canceled += instance.OnLockCursor;
+        }
+
+        private void UnregisterCallbacks(IDebugActions instance)
+        {
+            @LockCursor.started -= instance.OnLockCursor;
+            @LockCursor.performed -= instance.OnLockCursor;
+            @LockCursor.canceled -= instance.OnLockCursor;
+        }
+
+        public void RemoveCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDebugActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_MouseKeyboardSchemeIndex = -1;
     public InputControlScheme MouseKeyboardScheme
     {
@@ -418,5 +496,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnLockCursor(InputAction.CallbackContext context);
     }
 }
