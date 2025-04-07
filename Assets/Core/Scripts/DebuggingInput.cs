@@ -13,11 +13,11 @@ public class DebuggingInput : MonoBehaviour
         _debuggingMap = new InputMap();
         
         _debuggingMap.Debug.LockCursor.started += context => _cursorLocker.UnlockCursor();
-        _debuggingMap.Debug.LockCursor.performed += context => _cursorLocker.LockCursor();      
-        _debuggingMap.Debug.LockCursor.canceled += context => _cursorLocker.UnlockCursor();
+        _debuggingMap.Debug.LockCursor.performed += context => _cursorLocker.UnlockCursor();
+        _debuggingMap.Debug.LockCursor.canceled += context => _cursorLocker.LockCursor();
     }
     
-	private void OnEnable() => _debuggingMap.Enable();
+	private void OnEnable() => _debuggingMap.Enable();  
 	private void OnDisable() => _debuggingMap.Disable();
     
     private void GetRequireComponents()
