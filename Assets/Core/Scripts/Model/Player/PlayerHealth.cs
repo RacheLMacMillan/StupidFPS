@@ -5,7 +5,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public int MaxHealth { get; private set; }
     
+    [SerializeField] private PlayerHealthView _playerHealthView;
+    
     public readonly ReactiveProperty<int> CurrentHealth = new();
+    
     
     private void Awake()
     {
@@ -35,6 +38,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             Debug.Log($"Took damage = {roundedDamage}, current health = {CurrentHealth.Value}");
         }
+        
+        _playerHealthView.UpdateUI(CurrentHealth.Value, MaxHealth);
     }
     
     private void KillPlayer()
