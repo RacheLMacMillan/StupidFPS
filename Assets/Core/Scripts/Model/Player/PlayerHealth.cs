@@ -9,7 +9,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     public readonly ReactiveProperty<int> CurrentHealth = new();
     
-    
     private void Awake()
     {
         CurrentHealth.Value = MaxHealth;
@@ -17,35 +16,75 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        if (damage <= 0)
-        {
-            throw new ArgumentOutOfRangeException("Damage cant be less then 0 or equals 0.");
-        }
-        if (damage < 1)
-        {
-            damage = 1;
-        }
-       
-        int roundedDamage = (int)Mathf.Round(damage);
-        
-        CurrentHealth.Value -= roundedDamage;
-        
+        int roundedDamage = RoundValuable(damage);
+    
         if (CurrentHealth.Value <= 0)
         {
+            throw new UnityException("You're already dead.");
+        }
+        else if ((CurrentHealth.Value - roundedDamage) <= 0)
+        {
+            CurrentHealth.Value = 0;
+            
             KillPlayer();
         }
         else
         {
-            Debug.Log($"Took damage = {roundedDamage}, current health = {CurrentHealth.Value}");
+            CurrentHealth.Value -= roundedDamage;
+            
+            Debug.Log($"Took damage = {roundedDamage}, current health = {CurrentHealth.Value}.");
         }
         
+        _playerHealthView.UpdateUI(CurrentHealth.Value, MaxHealth);
+    }
+    
+    public void TakeHealth(float health)
+    {
+        int roundedHealth = RoundValuable(health);
+        
+        if (CurrentHealth.Value <= 0)
+        {
+            throw new UnityException("You're already dead.");
+        }
+        else if ((CurrentHealth.Value + roundedHealth) >= MaxHealth)
+        {
+            CurrentHealth.Value = MaxHealth;
+            
+            Debug.Log($"Enough for healing. You took a health = {roundedHealth}, current health = above the gods.");
+        }
+        else
+        {
+            CurrentHealth.Value += roundedHealth;
+        
+            Debug.Log($"You took a health = {roundedHealth}, current health = {CurrentHealth.Value}.");
+        }
+        
+        _playerHealthView.UpdateUI(CurrentHealth.Value, MaxHealth);
+    }
+    
+    public void ReviewPlayer()
+    {
+        CurrentHealth.Value = MaxHealth;
+            
         _playerHealthView.UpdateUI(CurrentHealth.Value, MaxHealth);
     }
     
     private void KillPlayer()
     {
         Debug.Log("Player is dead.");
-        
-        CurrentHealth.Value = 0;
+    }
+    
+    private int RoundValuable(float valuable)
+    {
+        if (valuable <= 0)
+        {
+            throw new ArgumentOutOfRangeException("Valuable cant be less then 0 or equals 0.");
+        }
+        if (valuable < 1)
+        {
+            valuable = 1;
+        }
+    
+        return (int)Mathf.Round(valuable);
     }
 }
