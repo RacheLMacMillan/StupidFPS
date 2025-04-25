@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerGroundedChecker))]
@@ -14,29 +15,32 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerHealth))]
 public class Player : MonoBehaviour, IInitializable
 {
+	[field: SerializeField] public PlayerUI PlayerUI { get; private set; }
+	
+	[field: SerializeField] public PlayerGroundedChecker PlayerGroundedChecker { get; private set; }
+	[field: SerializeField] public PlayerAbleToStandUpChecker PlayerAbleToStandUpChecker { get; private set; }
+	
+	[field: SerializeField] public PlayerGravitation PlayerGravitation { get; private set; }
+	[field: SerializeField] public PlayerMover PlayerMover { get; private set; }
+	[field: SerializeField] public PlayerLook PlayerLook { get; private set; }
+	[field: SerializeField] public PlayerJumper PlayerJumper { get; private set; }
+	[field: SerializeField] public PlayerCrouching PlayerCrouching { get; private set; }
+	[field: SerializeField] public PlayerSprinting PlayerSprinting { get; private set; }
+	[field: SerializeField] public PlayerDasher PlayerDasher { get; private set; }
+	
 	public ReactiveProperty<float> GravityValueViewModel = new();
 	public ReactiveProperty<float> MoveSpeedViewModel = new();
 	public ReactiveProperty<Vector3> MoveDirection = new();
 	public ReactiveProperty<Vector3> LookDirection = new();
+	
+	public ReactiveProperty<Vector3> PlayerVelocityViewModel = new();
 	
 	public ReactiveProperty<bool> IsGroundedViewModel = new();
 	public ReactiveProperty<bool> IsCrouchingViewModel = new();
 	public ReactiveProperty<bool> IsSprintingViewModel = new();
 	public ReactiveProperty<bool> IsAbleToStandUpViewModel = new();
 	
-	public ReactiveProperty<Vector3> PlayerVelocityViewModel = new();
 	
-	public PlayerGroundedChecker PlayerGroundedChecker { get; private set; }
-	public PlayerAbleToStandUpChecker PlayerAbleToStandUpChecker { get; private set; }
-	
-	public PlayerGravitation PlayerGravitation { get; private set; }
-	public PlayerMover PlayerMover { get; private set; }
-	public PlayerLook PlayerLook { get; private set; }
-	public PlayerJumper PlayerJumper { get; private set; }
-	public PlayerCrouching PlayerCrouching { get; private set; }
-	public PlayerSprinting PlayerSprinting { get; private set; }
-	public PlayerDasher PlayerDasher { get; private set; }
-
 	private void OnEnable()
 	{
 		PlayerGroundedChecker.IsGrounded.OnChanged += OnIsGroundedChanged;
@@ -73,6 +77,16 @@ public class Player : MonoBehaviour, IInitializable
 		PlayerCrouching = GetComponent<PlayerCrouching>();
 		PlayerSprinting = GetComponent<PlayerSprinting>();
 		PlayerDasher = GetComponent<PlayerDasher>();
+		
+		if (PlayerUI == null)
+		{
+			PlayerUI = FindFirstObjectByType<PlayerUI>();
+			
+			if (PlayerUI == null)
+			{
+				throw new NullReferenceException(nameof(PlayerUI));
+			}
+		}
 	}
 	
 	public void OnCrouchingStateEnabled()

@@ -10502,6 +10502,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58bc53ee07c02b4c9fa9c2426cc4e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <PlayerUI>k__BackingField: {fileID: 0}
+  <PlayerGroundedChecker>k__BackingField: {fileID: 1317052772}
+  <PlayerAbleToStandUpChecker>k__BackingField: {fileID: 1317052775}
+  <PlayerGravitation>k__BackingField: {fileID: 0}
+  <PlayerMover>k__BackingField: {fileID: 0}
+  <PlayerLook>k__BackingField: {fileID: 0}
+  <PlayerJumper>k__BackingField: {fileID: 0}
+  <PlayerCrouching>k__BackingField: {fileID: 1317052766}
+  <PlayerSprinting>k__BackingField: {fileID: 1317052771}
+  <PlayerDasher>k__BackingField: {fileID: 1317052778}
 --- !u!114 &1317052770
 MonoBehaviour:
   m_ObjectHideFlags: 0
