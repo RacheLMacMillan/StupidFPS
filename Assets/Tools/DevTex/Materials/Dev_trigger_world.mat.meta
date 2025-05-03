@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 8dcd8427f7423a940b98db10f0680e54
+guid: bc3a6ba7bc30e0341ba605cf911e18c3
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176107
-  packageName: 'DevTex: Prototyping Textures'
-  packageVersion: 1.0
-  assetPath: Assets/DevTex/Materials/Dev_trigger_world.mat
-  uploadId: 469896

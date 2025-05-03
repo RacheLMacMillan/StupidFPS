@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: fb4297963cd7bcd48b0bd9ffa8397df7
+guid: ca63139c5a25dd84bb3d47551a46b771
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176107
-  packageName: 'DevTex: Prototyping Textures'
-  packageVersion: 1.0
-  assetPath: Assets/DevTex/Materials/Dev_matte_tan.mat
-  uploadId: 469896

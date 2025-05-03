@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 55a1ecc59f729334182af7e1e9850036
+guid: bee0c6e2aa63e5f429a6709b705ad50b
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176107
-  packageName: 'DevTex: Prototyping Textures'
-  packageVersion: 1.0
-  assetPath: Assets/DevTex/Materials/Dev_trigger_Camera.mat
-  uploadId: 469896

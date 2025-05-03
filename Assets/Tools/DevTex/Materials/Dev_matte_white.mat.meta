@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: bb742d83ed804da40afff0bb98de17b3
+guid: f68f8d08f2c6c234bacff215e26dbe89
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176107
-  packageName: 'DevTex: Prototyping Textures'
-  packageVersion: 1.0
-  assetPath: Assets/DevTex/Materials/Dev_matte_white.mat
-  uploadId: 469896

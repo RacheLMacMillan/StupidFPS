@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 05c303e4d1eeb5447a09259f494fb777
+guid: e40132efaf574eb47b9455ac019c5882
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176107
-  packageName: 'DevTex: Prototyping Textures'
-  packageVersion: 1.0
-  assetPath: Assets/DevTex/Materials/Dev_zone_spawn.mat
-  uploadId: 469896

@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 23765eb7d4cd4b641906938dfcfa3714
+guid: b9814c4f212444c47b67f47c24f54d2b
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176107
-  packageName: 'DevTex: Prototyping Textures'
-  packageVersion: 1.0
-  assetPath: Assets/DevTex/Materials/Dev_reflective_90.mat
-  uploadId: 469896

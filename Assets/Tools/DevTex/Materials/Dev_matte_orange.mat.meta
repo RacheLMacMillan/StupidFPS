@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 9ec9ae56b49bc64479611146225f0e62
+guid: f2066f0f0157e5b43baf4686c246dc20
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176107
-  packageName: 'DevTex: Prototyping Textures'
-  packageVersion: 1.0
-  assetPath: Assets/DevTex/Materials/Dev_matte_orange.mat
-  uploadId: 469896

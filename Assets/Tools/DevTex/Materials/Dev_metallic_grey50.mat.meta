@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 20457073f8936cd4fbd445dfe7e2b7e4
+guid: 5277b7ea34c87644aa5acaad08ae6bc7
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176107
-  packageName: 'DevTex: Prototyping Textures'
-  packageVersion: 1.0
-  assetPath: Assets/DevTex/Materials/Dev_metallic_grey50.mat
-  uploadId: 469896
